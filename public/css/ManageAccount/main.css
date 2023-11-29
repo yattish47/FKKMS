@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 *,body{
     margin: 0;
     padding: 0;
@@ -9,6 +10,7 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    height: 100vh;
 }
 
 .Logo{
@@ -31,4 +33,56 @@ body{
     min-width: 100px;
     height: 12%;
     width: 12%; 
+}
+.card{
+    border-radius: 25px;
+    border: 1px solid #000000;
+    width: 37%;
+    min-width: 250px;
+}
+
+.login-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 40px;
+    color: #000000;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.login-input{
+    border: 1px solid #000000;
+    border-radius: 10px !important;
+    font-family: 'JetBrains Mono', monospace !important;
+}
+.form-label{
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.forget-pass-text{
+    font-family: 'JetBrains Mono', monospace;
+    margin-left: 13%;
+}
+
+.loginbtn{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: #000000;
+    background-color: #FFF2D8!important;
+    border: 1px solid #000000;
+    border-radius: 13px;
+}
+.loginbtn:hover{
+    background-color: #000000!important;
+    color: #FFF2D8!important;
+    border: 1px solid #000000;
+    border-radius: 13px;
+}
+
+.sign-up-link{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 17px;
+    font-weight: 200;
+    color: #000000;
+    text-decoration: none;
+    margin-top: 20px;
 }
