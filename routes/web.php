@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('ManageAccount.login');
-});
+})->name('login');
 
 
-Route::get('/test', function () {
-    return view('test');
-});
+Route::get('/register', function () {
+    return view('ManageAccount.register');
+})->name('register');

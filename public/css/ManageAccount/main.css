@@ -53,6 +53,7 @@ body{
     border: 1px solid #000000;
     border-radius: 10px !important;
     font-family: 'JetBrains Mono', monospace !important;
+    max-height: 40px!important;
 }
 .form-label{
     font-family: 'JetBrains Mono', monospace;
