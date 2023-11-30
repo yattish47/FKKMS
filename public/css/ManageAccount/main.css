@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'JetBrains Mono', monospace;
 }
 
 body{
@@ -10,7 +11,7 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 100vh;
+    height: 100%;
 }
 
 .Logo{
@@ -49,6 +50,7 @@ body{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 .login-input{
     border: 1px solid #000000;
     border-radius: 10px !important;
@@ -86,4 +88,44 @@ body{
     color: #000000;
     text-decoration: none;
     margin-top: 20px;
+}
+
+.signuptitle{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 32px;
+    color: #000000;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+}
+
+.signupbtn{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: #000000;
+    background-color: #FFF2D8!important;
+    border: 1px solid #000000;
+    border-radius: 13px;
+}
+.signupbtn:disabled{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: #c1c1c1;
+    background-color: #4e4e4e!important;
+    border: 1px solid #000000;
+    border-radius: 13px;
+}
+
+.signupbtn:hover{
+    background-color: #000000!important;
+    color: #FFF2D8!important;
+    border: 1px solid #000000;
+    border-radius: 13px;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
