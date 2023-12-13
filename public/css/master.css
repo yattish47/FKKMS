@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla&family=Raleway:wght@500&family=Wix+Madefor+Display:wght@600&display=swap');
+*,body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navbar{
+    font-family: 'Karla', sans-serif;
+    width: 100%;
+    background-color: #F9F3CC !important;
+}
+.navbar a,i{
+    font-size: 15px;
+
+    color: #000000;
+    font-family: 'Karla', sans-serif;
+}
+.nav-link{
+    border-radius: 10px;
+}
+.nav-link:hover{
+    font-size: 15px;
+    background-color: aqua;
+    border-radius: 10px;
+    color: #000000;
+    font-family: 'Karla', sans-serif;
+    transition: 400ms ease-in;
+}
+
+
+.navPersonIcon{
+    font-size: 25px;
+    padding-right: 20px;
+}
+
+footer {
+    position: fixed;
+    margin-top: 20px;
+    bottom: 0;
+    width: 100%;
+
+}
+

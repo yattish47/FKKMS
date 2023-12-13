@@ -1,4 +1,4 @@
-@extends('ManageAccount.layouts.master')
+@extends('layouts.manageAccountMaster')
 @section('content')
     <div class="container-fluid w-100">
         <div class="d-flex justify-content-center">

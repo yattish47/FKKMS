@@ -21,3 +21,12 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('ManageAccount.register');
 })->name('register');
+
+Route::get('/dashboard', function () {
+    return view('layouts.master');
+})->name('dashboard');
+
+
+Route::get('/listOfApplications', function(){
+    return view('ManageKiosk.KioskParticipant.listOfApplications');
+});
