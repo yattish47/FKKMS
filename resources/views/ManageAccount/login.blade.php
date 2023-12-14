@@ -11,9 +11,10 @@
             <div class="card">
                 <div class="card-body text-center">
                     <h5 class="card-title text-center login-title">Login</h5>
-                    <form class="needs-validation" novalidate>
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('authenticate') }}">
+                        @csrf
                         <div class="d-flex justify-content-center mt-3">
-                            <select class="form-select w-75 login-input" aria-label="Default select example"
+                            <select  name="user_type" class="form-select w-75 login-input" aria-label="Default select example"
                                 aria-describedby="inputGroupPrepend" required>
                                 <option selected value="">Select User Type</option>
                                 <option value="Admin">Admin</option>
@@ -26,7 +27,7 @@
 
                         <div class="d-flex justify-content-center mt-4">
                             <div class="form-outline w-75" data-mdb-input-init>
-                                <input type="text" id="validationCustomUsername" class="form-control login-input"
+                                <input name="username" type="text" id="validationCustomUsername" class="form-control login-input"
                                     autocomplete="username" aria-describedby="inputGroupPrepend" required />
                                 <label class="form-label" for="validationCustomUsername">Username</label>
                                 <div class="invalid-feedback" style="margin-top:5px; ">Please enter your username.</div>
@@ -35,7 +36,7 @@
 
                         <div class="d-flex justify-content-center mt-5">
                             <div class="form-outline w-75" data-mdb-input-init>
-                                <input type="password" id="form12" class="form-control login-input"
+                                <input name="password" type="password" id="form12" class="form-control login-input"
                                     autocomplete="new-password" aria-describedby="inputGroupPrepend" required />
                                 <label class="form-label" for="form12">Password</label>
                                 <div class="invalid-feedback" style="margin-top:5px;">Please enter your password.</div>

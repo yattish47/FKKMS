@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,12 @@ Route::get('/register', function () {
 
 Route::get('/dashboard', function () {
     return view('layouts.master');
-})->name('dashboard');
+});
 
 
 Route::get('/listOfApplications', function(){
     return view('ManageKiosk.KioskParticipant.listOfApplications');
-});
+})->name('dashboard');
+
+Route::get('/login', [AccountController::class, 'userAuth'])->name('authenticate');
+Route::post('/login', [AccountController::class, 'userAuth']);
