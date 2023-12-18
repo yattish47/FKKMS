@@ -32,6 +32,10 @@ Route::get('/listOfApplications', function(){
     return view('ManageKiosk.KioskParticipant.listOfApplications');
 })->name('dashboard');
 
+Route::get('/newApplication', function(){
+    return view('ManageKiosk.KioskParticipant.newApplication');
+})->name('newApplication');
+
 //Route::get('/login', [AccountController::class, 'userAuth'])->name('authenticate');
 Route::post('/login', [AccountController::class, 'userAuth'])->name('authenticate');
 
@@ -39,3 +43,4 @@ Route::post('/login', [AccountController::class, 'userAuth'])->name('authenticat
 Route::post('/signup', [AccountController::class, 'register'])->name('signup');
 
 Route::get('/logout', [AccountController::class, 'logout'])->name('logout');
+
