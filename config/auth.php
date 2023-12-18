@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'kioskparticipant' => [
+            'driver' => 'session',
+            'provider' => 'kioskparticipant',
+        ],
     ],
 
     /*
@@ -64,6 +68,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'kioskparticipant' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\kiosk_participant::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -94,6 +103,12 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'kioskparticipant' => [
+            'provider' => 'kioskparticipant',
+            'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],

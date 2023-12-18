@@ -27,10 +27,10 @@
 
                         <div class="d-flex justify-content-center mt-4">
                             <div class="form-outline w-75" data-mdb-input-init>
-                                <input name="username" type="text" id="validationCustomUsername" class="form-control login-input"
+                                <input name="icnumber" type="text" id="validationCustomUsername" class="form-control login-input"
                                     autocomplete="username" aria-describedby="inputGroupPrepend" required />
-                                <label class="form-label" for="validationCustomUsername">Username</label>
-                                <div class="invalid-feedback" style="margin-top:5px; ">Please enter your username.</div>
+                                <label class="form-label" for="validationCustomUsername">IC Number</label>
+                                <div class="invalid-feedback" style="margin-top:5px; ">Please enter your IC Number.</div>
                             </div>
                         </div>
 

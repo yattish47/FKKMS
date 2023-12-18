@@ -11,6 +11,8 @@ class kiosk_participant extends Model implements Authenticatable
 {
     use HasFactory, AuthenticatableTrait;
 
+    protected $guard = "kioskparticipant";
+    
     protected $fillable = [
         'kpICNumber',
         'kpName',

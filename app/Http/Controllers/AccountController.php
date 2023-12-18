@@ -14,14 +14,15 @@ class AccountController extends Controller
         // Validate the form data
         $request->validate([
             'user_type' => 'required',
-            'username' => 'required',
+            'icnumber' => 'required',
             'password' => 'required',
         ]);
 
         // Get form input
         $userType = $request->input('user_type');
-        $username = $request->input('username');
+        $username = $request->input('icnumber');
         $password = $request->input('password');
+
 
         // Determine which table to use based on user type
         switch ($userType) {
@@ -43,29 +44,121 @@ class AccountController extends Controller
 
             case 'Kiosk Participant':
                 // Implement logic for Kiosk Participant authentication
-                if ($this->kioskParticipantAuth($username, $password)) {
-                    return redirect()->route('dashboard'); // Adjust the route for the kiosk participant home page
+                if ($this->manualKioskParticipantAuth($username, $password)) {
+                    // Authentication successful, create a session
+                    $user = kiosk_participant::where('kpICNumber', $username)->first();
+                    $this->manualLogin($user);
+
+                    // Check if the user is authenticated
+                    if ($this->manualCheck()) {
+                        //  $user = $this->manualUser();
+
+                        return redirect()->route('dashboard');
+                    } else {
+
+                        return redirect()->back()->withErrors(['Invalid credentials']);
+                    }
                 } else {
+
                     return redirect()->back()->withErrors(['Invalid credentials']);
                 }
                 break;
 
             default:
+                dd('Reached here 3');
                 return redirect()->back()->withErrors(['Invalid user type']);
         }
     }
 
-    // Additional functions for specific user types
-    private function kioskParticipantAuth($username, $password)
+    public function register(Request $request)
     {
-        // Implement your authentication logic for Kiosk Participant
-        // Check the 'kiosk_participants' table with the provided username and password
-      //  return Auth::attempt(['kpUsername' => $username, 'kpPassword' => $password]);
-        $user = kiosk_participant::where('kpUsername', $username)->first();
+        $kpICNumber = $request->input('ic_number');
+        if (kiosk_participant::where('kpICNumber', $kpICNumber)->exists()) {
+          
+            return redirect()->back()->withErrors(['IC Number is already registered.']);
+        } else {
+            // Create a new KioskParticipant instance
+            $user = new kiosk_participant();
+            $user->kpICNumber = $request->input('ic_number');
+            $user->kpName = $request->input('name');
+            $user->kpUsername = $request->input('username');
+            $user->kpEmail = $request->input('email');
+            $user->kpType = $request->input('participant_type');
+            $user->kpPhoneNumber = $request->input('phone_number');
+            $user->kpMatricID = $request->input('matric_id');
+            $user->kpNationality = $request->input('nationality');
+            $user->kpAge = $request->input('age');
+            $user->kpPassword = Hash::make($request->input('password'));
 
-            if (!$user || !Hash::check($password, $user->kpPassword)) {
-                return false;
-            }else{
-                return true;}
+            // Save the user to the database
+            $user->save();
+
+
+            // Redirect to a success page or any other desired page
+            return redirect()->route('login');
+        }
+    }
+
+
+
+    // Additional functions for specific user types
+    // private function kioskParticipantAuth($username, $password)
+    // {
+
+    //     // Check the 'kiosk_participants' table with the provided username and password
+
+    //     // $user = kiosk_participant::where('kpUsername', $username)->first();
+
+    //     //     if (!$user || !Hash::check($password, $user->kpPassword)) {
+    //     //         return false;
+    //     //     }else{
+    //     //         return true;}
+    //     $credentials = ['kpUsername' => $username, 'password' => $password];
+
+    //     if (Auth::attempt($credentials)) {
+    //         // Authentication successful
+    //         $user = Auth::user();
+    //                 dd($user);
+    //         dd('Authentication successful');
+    //         return true;
+    //     } else {
+    //         // Authentication failed
+    //         dd('Authentication failed');
+    //         return false;
+    //     }
+    // }
+    private function manualKioskParticipantAuth($username, $password)
+    {
+        // Check the 'kiosk_participants' table with the provided username and password
+        $user = kiosk_participant::where('kpICNumber', $username)->first();
+
+        if ($user && Hash::check($password, $user->kpPassword)) {
+            // Authentication successful
+            return true;
+        } else {
+            // Authentication failed
+            return false;
+        }
+    }
+
+    private function manualLogin($user)
+    {
+        // Manually log in the user
+        session(['kioskparticipant' => $user->kpICNumber]);
+    }
+
+    private function manualCheck()
+    {
+        // Check if the user is logged in
+        return session()->has('kioskparticipant');
+    }
+
+
+    public function logout()
+    {
+        session()->forget('kioskparticipant');
+
+        // Redirect to the login page or another page
+        return redirect()->route('login');
     }
 }

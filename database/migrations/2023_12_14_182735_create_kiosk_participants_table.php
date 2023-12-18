@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('kpPhoneNumber', 30);
             $table->string('kpMatricID', 10);
             $table->string('kpNationality', 50);
-            $table->integer('kpAge');// Define kpAge as the primary key
-            $table->string('kpPassword', 20);
-            $table->integer('kpOTP'); // Define kpOTP as the primary key
+            $table->integer('kpAge');
+            $table->string('kpPassword', 255);
+            $table->integer('kpOTP')->nullable(); 
             $table->timestamps();
         });
     }

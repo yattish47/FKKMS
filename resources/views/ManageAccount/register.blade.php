@@ -11,13 +11,14 @@
             <div class="card text-center ">
                 <div class="card-body">
                     <h5 class="card-title text-center signuptitle">Kiosk Participant Sign Up</h5>
-                    <form class="row g-3 needs-validation" id="signUpForm" novalidate>
+                    <form class="row g-3 needs-validation" action="{{ route('signup') }}" id="signUpForm" novalidate method="POST">
+                        @csrf
                         <div class="col-2">
 
                         </div>
                         <div class="col-8 mt-4">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="text" class="form-control" id="validationCustom01" required />
+                                <input type="text" class="form-control" id="validationCustom01" name="ic_number" required />
                                 <label for="validationCustom01" class="form-label">IC Number</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter your IC Number</div>
@@ -31,7 +32,7 @@
                         </div>
                         <div class="col-8 mt-4">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="text" class="form-control" id="validationCustom02" required />
+                                <input type="text" class="form-control" id="validationCustom02" name="name" required />
                                 <label for="validationCustom02" class="form-label">Name</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter your Name</div>
@@ -45,7 +46,7 @@
                         </div>
                         <div class="col-8 mt-4">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="text" class="form-control" id="username" required  autocomplete="username" />
+                                <input type="text" class="form-control" id="username" required  name="username" autocomplete="username" />
                                 <label for="username" class="form-label">Username</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter your Username</div>
@@ -60,7 +61,7 @@
                         <div class="col-8 mt-4">
                             <div class="input-group form-outline" data-mdb-input-init>
                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                <input type="text" class="form-control" id="validationCustomUsername"
+                                <input type="text" class="form-control" id="validationCustomUsername" name="email"
                                     aria-describedby="inputGroupPrepend" required placeholder="Eg: john@gmail.com" />
                                 <label for="validationCustomUsername" class="form-label">Email</label>
                                 <div class="valid-feedback">Looks good!</div>
@@ -75,7 +76,7 @@
                         </div>
                         <div class="col-8 mt-4">
                             <select class="form-select" aria-label="Default select example"
-                                aria-describedby="inputGroupPrepend" required>
+                                aria-describedby="inputGroupPrepend" name="participant_type" required>
                                 <option selected value="">Select Participant Type</option>
                                 <option value="Kiosk Participant">Kiosk Participant</option>
                                 <option value="Vendor">Vendor</option>
@@ -92,7 +93,7 @@
                         <div class="col-8 mt-4">
                             <div class="input-group form-outline" data-mdb-input-init>
                                 <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-telephone-fill"></i></span>
-                                <input type="text" class="form-control" id="phoneNumber"
+                                <input type="text" class="form-control" id="phoneNumber"  name="phone_number"
                                     aria-describedby="inputGroupPrepend" required placeholder="Eg: 0121234566" />
                                 <label for="phoneNumber" class="form-label">Phone Number</label>
                                 <div class="valid-feedback">Looks good!</div>
@@ -107,7 +108,7 @@
                         </div>
                         <div class="col-8 mt-4">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="text" class="form-control" id="matricID" />
+                                <input type="text" class="form-control" id="matricID" name="matric_id" />
                                 <label for="username" class="form-label">Matric ID(FK Students)</label>
                             </div>
                         </div>
@@ -119,7 +120,7 @@
                         </div>
                         <div class="col-8 mt-4">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="text" class="form-control" id="nationality" required />
+                                <input type="text" class="form-control" id="nationality" name="nationality" required />
                                 <label for="nationality" class="form-label">Nationality</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter your Nationality.</div>
@@ -133,7 +134,7 @@
                         </div>
                         <div class="col-8 mt-4">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="number" class="form-control" id="age" min="0" step="1" required style="appearance: none; -moz-appearance: textfield;"/>
+                                <input type="number" class="form-control" id="age" min="0" step="1" name="age"  required style="appearance: none; -moz-appearance: textfield;"/>
                                 <label for="age" class="form-label">Age</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter your age.</div>
@@ -147,7 +148,7 @@
                         </div>
                         <div class="col-8 mt-4">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="password" class="form-control" id="password"  autocomplete="new-password" required/>
+                                <input type="password" class="form-control" id="password" name="password" autocomplete="new-password" required/>
                                 <label for="password" class="form-label">Password</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter your password.</div>

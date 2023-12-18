@@ -23,7 +23,7 @@ Route::get('/register', function () {
     return view('ManageAccount.register');
 })->name('register');
 
-Route::get('/dashboard', function () {
+Route::get('/layout', function () {
     return view('layouts.master');
 });
 
@@ -32,5 +32,10 @@ Route::get('/listOfApplications', function(){
     return view('ManageKiosk.KioskParticipant.listOfApplications');
 })->name('dashboard');
 
-Route::get('/login', [AccountController::class, 'userAuth'])->name('authenticate');
-Route::post('/login', [AccountController::class, 'userAuth']);
+//Route::get('/login', [AccountController::class, 'userAuth'])->name('authenticate');
+Route::post('/login', [AccountController::class, 'userAuth'])->name('authenticate');
+
+//Route::get('/signup', [AccountController::class, 'register']);
+Route::post('/signup', [AccountController::class, 'register'])->name('signup');
+
+Route::get('/logout', [AccountController::class, 'logout'])->name('logout');

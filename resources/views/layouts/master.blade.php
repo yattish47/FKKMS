@@ -57,10 +57,10 @@
         <!-- Left links -->
         <ul class="navbar-nav ms-auto mb-2 me-2 mb-lg-0" style="width: 38%">
           <li class="nav-item me-4">
-            <a class="nav-link" href="#"><i class="bi bi-bar-chart-fill me-2"></i>SALES</a>
+            <a class="nav-link" href="#"><i class="bi bi-bar-chart-fill me-2 "></i>SALES</a>
           </li>
           <li class="nav-item me-4">
-            <a class="nav-link" href="#"><i class="bi bi-file-plus-fill  me-2"></i>APPLICATION</a>
+            <a class="nav-link" href="#"><i class="bi bi-file-plus-fill  me-2" {{ Route::currentRouteNamed('dashboard') ? 'active' : '' }}></i>APPLICATION</a>
           </li>
           <li class="nav-item me-4">
             <a class="nav-link" href="#"><i class="bi bi-pen-fill  me-2"></i>COMPLAINTS</a>
