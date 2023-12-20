@@ -16,10 +16,9 @@
     color: #1F1F1F;
     margin-bottom: 0px;
 }
-footer {
-    
-  margin-top: 30px;
-  bottom: 0;
-  width: 100%;
 
-}
+.form-check-input {
+    transform: scale(1.5); /* Adjust the scale as needed */
+  }
+
+ 

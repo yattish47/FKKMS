@@ -28,13 +28,7 @@ Route::get('/layout', function () {
 });
 
 
-Route::get('/listOfApplications', function(){
-    return view('ManageKiosk.KioskParticipant.listOfApplications');
-})->name('dashboard');
 
-Route::get('/newApplication', function(){
-    return view('ManageKiosk.KioskParticipant.newApplication');
-})->name('newApplication');
 
 //Route::get('/login', [AccountController::class, 'userAuth'])->name('authenticate');
 Route::post('/login', [AccountController::class, 'userAuth'])->name('authenticate');
@@ -44,3 +38,18 @@ Route::post('/signup', [AccountController::class, 'register'])->name('signup');
 
 Route::get('/logout', [AccountController::class, 'logout'])->name('logout');
 
+Route::get('/listOfApplications', function(){
+    return view('ManageKiosk.KioskParticipant.listOfApplications');
+})->name('dashboard');
+
+Route::get('/newApplication', function(){
+    return view('ManageKiosk.KioskParticipant.newApplication');
+})->name('newApplication');
+
+Route::get('/terms-and-condition', function(){
+    return view('ManageKiosk.KioskParticipant.termsAndCondition');
+})->name('terms-and-condition');
+
+Route::get('/viewApplication', function(){
+    return view('ManageKiosk.KioskParticipant.viewApplication');
+})->name('viewApplication');
