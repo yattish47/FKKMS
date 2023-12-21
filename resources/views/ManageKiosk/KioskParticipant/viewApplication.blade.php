@@ -153,26 +153,45 @@
                    
 
                     <div class="col-12 mt-4">
-                        <button class="btn signupbtn btn-primary" id="submitbtn" type="submit" visible="true"
+                        <button class="btn signupbtn btn-primary" id="submitbtn" type="submit" disabled
                             data-mdb-ripple-init>Submit
                             form</button>
                     </div>
                 </form>
-                <div class="col-4 mt-4  ms-3 text-start">
-                    <div class="form-check form-switch form-switch-lg">
-                        <label class="form-check-label ms-4" for="flexSwitchCheckDefault">Edit Mode</label>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                      </div>
-                      
+                <div class="d-flex mt-4 justify-content-between">
+                    <div class="col-4 mt-4  ms-3 text-start">
+                        <div class="form-check form-switch form-switch-lg">
+                            <label class="form-check-label paragraphText ms-4" for="flexSwitchCheckDefault">Edit Mode</label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="EditFunction()" />
+                          </div>
+                          
+                    </div>
+                    <div class="col-4 mt-4 ">
+                        <p class="paragraphText info">Status: Pending</p>
+                    </div>
+                    <div class="col-4 mt-4">
+                        <p class="paragraphText info">Remark: None</p>
+                    </div>
                 </div>
-                <div class="col-8 mt-4 ">
-                    
-                </div>
-                <div class="col-2">
-
-                </div>
+                
                 
             </div>
         </div>
     </div>
+
+    <script>
+        function EditFunction() {
+            var checkbox = document.getElementById('flexSwitchCheckDefault');
+            var formFields = document.querySelectorAll('#signUpForm input, #signUpForm select, #signUpForm textarea, #signUpForm button');
+            var info = document.querySelectorAll('.info');
+            formFields.forEach(function (field) {
+                field.disabled = !checkbox.checked;
+                
+            });
+            info.forEach(function (field) {
+                field.hidden = checkbox.checked;
+                
+            });
+        }
+    </script>
     @endsection

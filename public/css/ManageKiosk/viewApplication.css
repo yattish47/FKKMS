@@ -21,4 +21,9 @@
     transform: scale(1.5); /* Adjust the scale as needed */
   }
 
+.paragraphText{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: #848484;
+}
  
