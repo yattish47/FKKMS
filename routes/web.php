@@ -55,3 +55,16 @@ Route::get('/terms-and-condition', function(){
 Route::get('/viewApplication', function(){
     return view('ManageKiosk.KioskParticipant.viewApplication');
 })->name('viewApplication');
+
+Route::get('/pupuk/listofapplication', function(){
+    return view('ManageKiosk.PUPUKAdmin.listOfApplicationsAndKiosk');
+})->name('pupukViewApplication');
+
+
+Route::get('/pupuk/application-approval', function(){
+    return view('ManageKiosk.PUPUKAdmin.applicationApproval');
+})->name('pupukApplicationApproval');
+
+Route::get('/pupuk/view-application', function(){
+    return view('ManageKiosk.PUPUKAdmin.viewApplication');
+})->name('pupukViewApplication');
