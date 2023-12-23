@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FKKMS-Login Page</title>
+    <title>FKKMS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -40,7 +40,7 @@
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Navbar brand -->
-                <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                <a class="navbar-brand mt-2 mt-lg-0" href="{{route('dashboard')}}">
                     <img src="{{ url('assets/fkkmsLogo.png') }}" height="60" alt="MDB Logo" loading="lazy" />
                 </a>
                 <!-- Left links -->

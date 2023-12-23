@@ -74,7 +74,7 @@
 
                                 <td>
                                     <div class="btn-group shadow-0" role="group" style="margin-left: -20px">
-                                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i
+                                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="window.location='{{ route('viewApplication') }}'"><i
                                                 class="fa-solid fa-eye"
                                                 style="color: #00ff59; font-size: 20px;"></i></button>
                                         {{-- <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button> --}}

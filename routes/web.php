@@ -26,7 +26,9 @@ Route::get('/register', function () {
 Route::get('/layout', function () {
     return view('layouts.master');
 });
-
+Route::get('/layoutpupuk', function () {
+    return view('layouts.pupukAdminMaster');
+});
 
 
 
