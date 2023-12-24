@@ -6,18 +6,20 @@
         <div class="card h-100 text-center">
             <div class="card-body">
                 <h3 class="text-center main-title mt-4">New Kiosk Application</h3>
-                <form class="row g-3 needs-validation" id="signUpForm" novalidate>
-
+                <form action="{{ route('newApplicationSubmission') }}" class="row g-3 needs-validation" id="signUpForm" novalidate method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="col-2">
-
+                        @error('kInventoryType')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     </div>
                     <div class="col-8 mt-4">
                         <select class="form-select" aria-label="Default select example" aria-describedby="inputGroupPrepend"
                             name="kInventoryType" required>
                             <option selected value="">Choose Inventory</option>
-                            <option value="Waffle Machine">Waffle Machine</option>
-                            <option value="Coffee Machine">Coffee Machine</option>
-                            <option value="Oden Stove">Oden Stove</option>
+                            <option value="WaffleMachine">Waffle Machine</option>
+                            <option value="CoffeeMachine">Coffee Machine</option>
+                            <option value="OdenStove">Oden Stove</option>
                         </select>
                         <div class="invalid-feedback">Please Select Your Inventory.</div>
                     </div>
@@ -44,8 +46,8 @@
                         <select class="form-select" aria-label="Default select example" aria-describedby="inputGroupPrepend"
                             name="kBusinessType" required>
                             <option selected value="">Business Type</option>
-                            <option value="Sole Ownership">Sole Ownership</option>
-                            <option value="Shared Ownership">Shared Ownership</option>
+                            <option value="SoleOwnership">Sole Ownership</option>
+                            <option value="SharedOwnership">Shared Ownership</option>
                         </select>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please select your business type.</div>
@@ -206,21 +208,7 @@
                 }, false);
             });
         })();
-        document.getElementById('age').addEventListener('wheel', function(e) {
-            e.preventDefault();
-        });
-        document.getElementById('age').addEventListener('input', function(e) {
-            var input = e.target,
-                value = input.value;
-
-            if (value < 0 || Math.floor(value) != value) {
-                input.value = 0;
-            }
-        });
-        document.getElementById('age').addEventListener('keydown', function(e) {
-            if (e.key === '-' || e.key === '.') {
-                e.preventDefault();
-            }
-        });
+      
+       
     </script>
 @endsection

@@ -42,51 +42,65 @@
                         <thead>
                             <tr>
                                 <th class="firstcol">No</th>
-                                <th>Username</th>
-                                <th>User ID</th>
-                                <th>Roles</th>
+                                <th>Name</th>
+                                <th>IC Number</th>
+                                <th> Kiosk Status</th>
+                                <th>Application Status</th>
                                 <th class="lastcol">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach ($kioskApplications  as $index => $application)
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
 
                                         <div class="ms-3">
-                                            <p class="fw-bold mb-1">1</p>
+                                            <p class="fw-bold mb-1">{{ $index + 1 }}</p>
 
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="fw-normal mb-1">yatt</p>
+                                    <p class="fw-normal mb-1">{{ $application->kpName }}</p>
 
                                 </td>
                                 <td>
-                                    <p class="fw-normal mb-1">cb3333</p>
+                                    <p class="fw-normal mb-1">{{ $application->kpICNumber }}</p>
                                 </td>
                                 <td>
-
-                                    <span class="badge badge-success rounded-pill d-inline">admin</span>
+                                    <p class="fw-normal mb-1">{{ $application->kpICNumber }}</p>
+                                </td>
+                                <td>
+                                    @if ($application->kApplicationStatus == 'Pending')
+                                        <span class="badge badge-warning rounded-pill d-inline"> {{ $application->kApplicationStatus }}</span>
+                                    @elseif ($application->kApplicationStatus == 'Approved')
+                                    <span class="badge badge-success rounded-pill d-inline"> {{ $application->kApplicationStatus }}</span>
+                                    @elseif ($application->kApplicationStatus == 'Rejected')
+                                    <span class="badge badge-danger rounded-pill d-inline"> {{ $application->kApplicationStatus }}</span>
+                                    @endif
                                 </td>
 
                                 <td>
                                     <div class="btn-group shadow-0" role="group" style="margin-left: -20px">
-                                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="window.location='{{ route('viewApplication') }}'"><i
+                                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="window.location='{{ route('viewApplication', ['id' => $application->kApplicationID]) }}'"><i
                                                 class="fa-solid fa-eye"
                                                 style="color: #00ff59; font-size: 20px;"></i></button>
                                         {{-- <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button> --}}
+                                        @if ($application->kApplicationStatus == 'Pending')
                                         <button type="button" class="btn btn-link" data-mdb-color="dark"><i
                                                 class="fa-regular fa-trash-can"
                                                 style="color: #a30d11; font-size: 20px;"></i></button>
-
+                                        @elseif ($application->kApplicationStatus == 'Approved' || $application->kApplicationStatus == 'Rejected')
+                                        <button type="button" class="btn btn-link" data-mdb-color="dark" @disabled(true)><i
+                                                class="fa-regular fa-trash-can"
+                                                style="color: #a30d11; font-size: 20px;"></i></button>
+                                            @endif
                                     </div>
                                 </td>
                             </tr>
 
-
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

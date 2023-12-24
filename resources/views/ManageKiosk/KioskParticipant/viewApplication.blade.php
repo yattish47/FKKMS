@@ -14,10 +14,14 @@
                     <div class="col-8 mt-4">
                         <select class="form-select" aria-label="Default select example" aria-describedby="inputGroupPrepend"
                             name="kInventoryType" required disabled>
-                            <option selected value="">Choose Inventory</option>
-                            <option value="Waffle Machine">Waffle Machine</option>
-                            <option value="Coffee Machine">Coffee Machine</option>
-                            <option value="Oden Stove">Oden Stove</option>
+                            @if($kioskApplication->kInventoryType == "Waffle Machine")
+                            <option selected value="Waffle Machine">Waffle Machine</option>
+                            @elseif($kioskApplication->kInventoryType == "Coffee Machine")
+                            <option selected value="Coffee Machine">Coffee Machine</option>
+                            @elseif($kioskApplication->kInventoryType == "Oden Stove")
+                            <option selected value="Oden Stove">Oden Stove</option>
+                            @endif
+                          
                         </select>
                         <div class="invalid-feedback">Please Select Your Inventory.</div>
                     </div>
@@ -29,7 +33,7 @@
                     </div>
                     <div class="col-8 mt-4">
                         <div class="form-outline" data-mdb-input-init>
-                            <input type="text" class="form-control" id="validationCustom02" name="kBusinessName" disabled/>
+                            <input type="text" class="form-control" id="validationCustom02" name="kBusinessName" disabled value="{{$kioskApplication->kBusinessName}}"/>
                             <label for="validationCustom02" class="form-label">Business Name (Optional)</label>
                             <div class="valid-feedback">Looks good!</div>
                         </div>
@@ -43,9 +47,11 @@
                     <div class="col-8 mt-4">
                         <select class="form-select" aria-label="Default select example" aria-describedby="inputGroupPrepend"
                             name="kBusinessType" required disabled>
-                            <option selected value="">Business Type</option>
-                            <option value="Sole Ownership">Sole Ownership</option>
-                            <option value="Shared Ownership">Shared Ownership</option>
+                            @if($kioskApplication->kBusinessType == "Sole Ownership")
+                            <option selected value="Sole Ownership">Sole Ownership</option>
+                            @elseif($kioskApplication->kBusinessType == "Shared Ownership")
+                            <option selected value="Shared Ownership">Shared Ownership</option>
+                            @endif
                         </select>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please select your business type.</div>
@@ -60,7 +66,7 @@
                         <div class=" form-outline" data-mdb-input-init>
 
                             <input type="date" class="form-control" id="validationCustomUsername" name="kStartDate"
-                                aria-describedby="inputGroupPrepend" required placeholder="Eg: 25/Jan/2023" disabled />
+                                aria-describedby="inputGroupPrepend" required placeholder="Eg: 25/Jan/2023" disabled value="{{$kioskApplication->kStartDate}}" />
                             <label for="validationCustomUsername" class="form-label">Date</label>
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please enter your start Date.</div>
@@ -74,7 +80,7 @@
                     </div>
                     <div class="col-8 mt-4">
                         <div class="form-outline" data-mdb-input-init>
-                            <input type="text" class="form-control" id="matricID" name="kDurationOfRenting" disabled />
+                            <input type="text" class="form-control" id="matricID" name="kDurationOfRenting" disabled value="{{$kioskApplication->kDurationOfRenting}}" />
                             <label for="username" class="form-label">Duration of Renting (Optional)</label>
                             <div class="valid-feedback">Looks good!</div>
                         </div>
@@ -91,7 +97,7 @@
                     <div class="col-8 mt-4">
                         <div class="form-outline" data-mdb-input-init>
                             <input type="text" class="form-control" id="bankAccNumber" name="kBankAccNumber"
-                                aria-describedby="inputGroupPrepend" required placeholder="Eg: 12546123151" disabled />
+                                aria-describedby="inputGroupPrepend" required placeholder="Eg: 12546123151" disabled  value="{{$kioskApplication->kBankAccNumber}}"/>
                             <label for="bankAccNumber" class="form-label">Bank Account Number</label>
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please enter your Bank Account Number.</div>
@@ -105,7 +111,7 @@
                     </div>
                     <div class="col-8 mt-4">
                         <div class="form-outline" data-mdb-input-init>
-                            <input type="text" class="form-control" id="kBankName" name="kBankName" disabled />
+                            <input type="text" class="form-control" id="kBankName" name="kBankName" disabled value="{{$kioskApplication->kBankName}}" />
                             <label for="kBankName" class="form-label">Bank Name</label>
                             <div class="valid-feedback">Looks good!</div>
                         </div>
@@ -120,7 +126,7 @@
                     <div class="col-8 mt-4">
 
                         <div class="form-outline" data-mdb-input-init>
-                            <textarea class="form-control" id="kDescOfProduct" rows="4" name="kDescOfProduct" required disabled></textarea>
+                            <textarea class="form-control" id="kDescOfProduct" rows="4" name="kDescOfProduct" required disabled >{{$kioskApplication->kDescOfProduct}}</textarea>
                             <label class="form-label" for="kDescOfProduct">Description of Product</label>
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please enter Description of Product.</div>
@@ -134,8 +140,17 @@
                     </div>
                     <div class="col-8 mt-4 text-start">
                         <label class="form-label text-start" for="customFile">IC Copy (Front and Back)</label>
-                        <input type="file" class="form-control" id="customFile" name="kICCopy" required  disabled/>
-                        <div class="invalid-feedback">Please enter upload your IC Copy.</div>
+                    
+                        <input type="file" class="form-control" id="customFile" name="kICCopy" required disabled readonly value="{{ basename($kioskApplication->kICCopy) }}"/>
+                    
+                        @if($kioskApplication->kICCopy)
+                        <a href="{{ asset('storage/' . $kioskApplication->kICCopy) }}" target="_blank">View IC Copy</a>
+
+                        @else
+                            <p>No IC Copy uploaded.</p>
+                        @endif
+                    
+                        <div class="invalid-feedback">Please upload your IC Copy.</div>
                     </div>
                     <div class="col-2">
 

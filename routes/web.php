@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\KioskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,21 +41,19 @@ Route::post('/signup', [AccountController::class, 'register'])->name('signup');
 
 Route::get('/logout', [AccountController::class, 'logout'])->name('logout');
 
-Route::get('/listOfApplications', function(){
-    return view('ManageKiosk.KioskParticipant.listOfApplications');
-})->name('dashboard');
+Route::get('/listOfApplications', [KioskController::class, 'viewListOfApplications'])->name('dashboard');
 
 Route::get('/newApplication', function(){
     return view('ManageKiosk.KioskParticipant.newApplication');
 })->name('newApplication');
 
+Route::post('/newApplication', [KioskController::class, 'newApplication'])->name('newApplicationSubmission');
+
 Route::get('/terms-and-condition', function(){
     return view('ManageKiosk.KioskParticipant.termsAndCondition');
 })->name('terms-and-condition');
 
-Route::get('/viewApplication', function(){
-    return view('ManageKiosk.KioskParticipant.viewApplication');
-})->name('viewApplication');
+Route::get('/viewApplication/{id}', [KioskController::class, 'viewApplication'])->name('viewApplication');
 
 Route::get('/pupuk/listofapplication', function(){
     return view('ManageKiosk.PUPUKAdmin.listOfApplicationsAndKiosk');
