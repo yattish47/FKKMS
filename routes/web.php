@@ -55,6 +55,10 @@ Route::get('/terms-and-condition', function(){
 
 Route::get('/viewApplication/{id}', [KioskController::class, 'viewApplication'])->name('viewApplication');
 
+Route::post('/viewApplication/edit/{id}', [KioskController::class, 'editApplication'])->name('editApplication');
+
+Route::get('/viewApplication/delete/{id}', [KioskController::class, 'deleteApplication'])->name('deleteApplication');
+
 Route::get('/pupuk/listofapplication', function(){
     return view('ManageKiosk.PUPUKAdmin.listOfApplicationsAndKiosk');
 })->name('pupukViewApplication');

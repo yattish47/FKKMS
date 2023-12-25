@@ -49,8 +49,7 @@
                         <a class="nav-link" href="#"><i class="bi bi-bar-chart-fill me-2 "></i>SALES</a>
                     </li>
                     <li class="nav-item me-4">
-                        <a class="nav-link" href="#"><i class="bi bi-file-plus-fill  me-2"
-                                {{ Route::currentRouteNamed('dashboard') ? 'active' : '' }}></i>APPLICATION</a>
+                        <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard')}}"><i class="bi bi-file-plus-fill  me-2"></i>APPLICATION</a>
                     </li>
                     <li class="nav-item me-4">
                         <a class="nav-link" href="#"><i class="bi bi-pen-fill  me-2"></i>COMPLAINTS</a>

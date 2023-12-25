@@ -65,4 +65,50 @@ class KioskController extends Controller
         $kioskApplication = kiosk_applications::where('kApplicationID', $id)->first();
         return view('ManageKiosk.KioskParticipant.viewApplication', ['kioskApplication' => $kioskApplication]);
     }
+
+
+    public function editApplication(Request $request, $id){
+       
+
+        if ($request->hasFile('kICCopy') || $request->hasfile('kSSMCert')) {
+            $kICCopyPath = $request->file('kICCopy')->store('kICCopy', 'public');
+            $kSSMCertPath = $request->file('kSSMCert')->store('kSSMCert', 'public');
+         kiosk_applications::where('kApplicationID', $id)->update([
+             
+            
+            'kInventoryType' => $request->input('kInventoryType'),
+            'kBusinessName' => $request->input('kBusinessName'),
+            'kBusinessType'=> $request->input('kBusinessType'),
+            'kStartDate' => date('Y-m-d', strtotime($request->input('kStartDate'))),
+            'kDurationOfRenting' => $request->input('kDurationOfRenting'),
+            'kBankAccNumber' => $request->input('kBankAccNumber'),
+            'kBankName' => $request->input('kBankName'),
+            'kDescOfProduct' => $request->input('kDescOfProduct'),
+            'kICCopy' => $kICCopyPath,
+            'kSSMCert' => $kSSMCertPath,
+        
+
+        ]);
+    }else{
+        kiosk_applications::where('kApplicationID', $id)->update([
+         
+           
+           'kInventoryType' => $request->input('kInventoryType'),
+           'kBusinessName' => $request->input('kBusinessName'),
+           'kBusinessType'=> $request->input('kBusinessType'),
+           'kStartDate' => date('Y-m-d', strtotime($request->input('kStartDate'))),
+           'kDurationOfRenting' => $request->input('kDurationOfRenting'),
+           'kBankAccNumber' => $request->input('kBankAccNumber'),
+           'kBankName' => $request->input('kBankName'),
+           'kDescOfProduct' => $request->input('kDescOfProduct'),
+           
+        ]);
+    }
+        return $this->viewApplication($id);
+    }
+
+    public function deleteApplication($id){
+        kiosk_applications::where('kApplicationID', $id)->delete();
+        return $this->viewListOfApplications();
+    }
 }

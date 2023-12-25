@@ -63,7 +63,7 @@
 
                             <input type="date" class="form-control" id="validationCustomUsername" name="kStartDate"
                                 aria-describedby="inputGroupPrepend" required placeholder="Eg: 25/Jan/2023" />
-                            <label for="validationCustomUsername" class="form-label">Date</label>
+                            <label for="validationCustomUsername" class="form-label">Choose Start Date</label>
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please enter your start Date.</div>
                         </div>

@@ -36,6 +36,13 @@ body{
     font-size: 25px;
     padding-right: 20px;
 }
+.navbar-nav .nav-item .nav-link.active {
+    color: #fff !important;
+    background-color: #4089DF; /* Change the background color to match your active state styling */
+}
+.navbar-nav .nav-item .nav-link.active i{
+    color: #fff !important;
+}
 
 footer {
     

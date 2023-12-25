@@ -13,7 +13,7 @@
                     <div class="d-flex justify-content-center w-100 mt-4" style="overflow: hidden">
                         <div class="col-4 input-group w-25" style="margin-left: 170px; ">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" id="form1" class="form-control" />
+                                <input type="search" id="form1" class="form-control" onkeyup="myFunction()"/>
                                 <label class="form-label" for="form1">Search</label>
                             </div>
                             <button type="button" class="btn btn-primary" style="background-color: #D2D6FB !important; "
@@ -88,7 +88,7 @@
                                                 style="color: #00ff59; font-size: 20px;"></i></button>
                                         {{-- <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button> --}}
                                         @if ($application->kApplicationStatus == 'Pending')
-                                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i
+                                        <button type="button" class="btn btn-link" data-mdb-color="dark"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
                                                 class="fa-regular fa-trash-can"
                                                 style="color: #a30d11; font-size: 20px;"></i></button>
                                         @elseif ($application->kApplicationStatus == 'Approved' || $application->kApplicationStatus == 'Rejected')
@@ -108,4 +108,44 @@
             </div>
         </div>
     </div>
+
+     <!-- Modal -->
+     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="staticBackdropLabel">Are You Sure You Want to Delete Your Application?</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+
+             <div class="modal-footer d-flex justify-content-center">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                 <button type="button" class="btn btn-danger" id="confirmDelete" onclick="window.location='{{ route('deleteApplication', ['id' => $application->kApplicationID]) }}'">Yes</button>
+             </div>
+         </div>
+     </div>
+ </div>
+
+
+ <script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("form1");
+  filter = input.value.toUpperCase();
+  table = document.getElementsByTagName("table")[0];
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[4]; // Change index to match the column you want to search
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
 @endsection
