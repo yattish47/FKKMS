@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\KioskController;
+use App\Http\Controllers\SalesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,7 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('ManageAccount.register');
 })->name('register');
+
 
 Route::get('/layout', function () {
     return view('layouts.master');
@@ -71,3 +74,9 @@ Route::get('/pupuk/application-approval', function(){
 Route::get('/pupuk/view-application', function(){
     return view('ManageKiosk.PUPUKAdmin.viewApplication');
 })->name('pupukViewApplication');
+
+Route::get('/sales/create', [SalesController::class, 'create'])->name('ManageReport.KioskParticipant.addSales');
+Route::post('/sales/store', [SalesController::class, 'store'])->name('ManageReport.KioskParticipant.addSales');
+// Update sales record
+Route::put('/{id}', [SalesController::class, 'update'])->name('ManageReport.KioskParticipant.updateSales');
+Route::delete('/sales/delete/{id}', [SalesController::class, 'destroy'])->name('sales.delete');
