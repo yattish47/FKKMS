@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\kiosk_applications;
 use App\Models\kiosk_participant;
+use App\Models\kiosks;
 use Illuminate\Support\Facades\Log;
 
 class KioskController extends Controller
@@ -110,5 +111,13 @@ class KioskController extends Controller
     public function deleteApplication($id){
         kiosk_applications::where('kApplicationID', $id)->delete();
         return $this->viewListOfApplications();
+    }
+
+
+    public function viewListOfApplicationForPupuk(){
+        $kioskApplications = kiosk_applications::all();
+        $kiosks = kiosks::all();
+        
+        return view('ManageKiosk.PUPUKAdmin.listOfApplicationsAndKiosk', ['kioskApplications' => $kioskApplications, 'kiosks' => $kiosks]);
     }
 }

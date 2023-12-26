@@ -29,59 +29,44 @@
                                 <thead>
                                     <tr>
                                         <th class="firstcol">No</th>
-                                        <th>Username</th>
-                                        <th>User ID</th>
-                                        <th>Roles</th>
-                                        <th class="lastcol">Actions</th>
+                                        <th>Kiosk ID</th>
+                                        <th>Kiosk Participant IC</th>
+                                        <th class="lastcol">Kiosk Status</th>
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
 
-
+                                    @foreach ($kiosks as $index => $kiosk)
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center">
 
                                                 <div class="ms-3">
-                                                    <p class="fw-bold mb-1"></p>
+                                                    <p class="fw-bold mb-1">{{ $index + 1 }}</p>
 
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="fw-normal mb-1"></p>
+                                            <p class="fw-normal mb-1">{{ $kiosk->kioskID }}</p>
 
                                         </td>
                                         <td>
-                                            <p class="fw-normal mb-1"></p>
+                                            <p class="fw-normal mb-1">{{ $kiosk->kpICNumber }}</p>
                                         </td>
                                         <td>
-
-                                            <span class="badge badge-success rounded-pill d-inline">d</span>
+                                            @if ($kiosk->kioskStatus == 'Active')
+                                            <span class="badge badge-success rounded-pill d-inline">{{ $kiosk->kioskStatus }}</span>
+                                            @else
+                                            <span class="badge badge-danger rounded-pill d-inline">{{ $kiosk->kioskStatus }}</span>
+                                            @endif
                                         </td>
 
-                                        <td>
-                                            <div class="btn-group shadow-0" role="group">
-                                                <button type="button" class="btn btn-link" data-mdb-color="dark"><i
-                                                        class="fa-solid fa-eye"
-                                                        style="color: #00ff59; font-size: 20px;"></i></button>
-                                                <button type="button" class="btn btn-link" data-mdb-color="dark"><i
-                                                        class="fa-regular fa-pen-to-square"
-                                                        style="color: #624de3; font-size: 20px;"></i></button>
-                                                <button type="button" class="btn btn-link" data-mdb-color="dark"
-                                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                                                        class="fa-regular fa-trash-can"
-                                                        style="color: #a30d11; font-size: 20px;"></i></button>
-
-
-
-                                                <!-- Modal -->
-
-                                            </div>
-                                        </td>
+                                        
                                     </tr>
 
-
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -109,50 +94,63 @@
                                 <thead>
                                     <tr>
                                         <th class="firstcol">No</th>
-                                        <th>Username</th>
-                                        <th>User ID</th>
-                                        <th>Roles</th>
+                                        <th>Participant IC</th>
+                                        <th>Inventory Type</th>
+                                        <th>Application Status</th>
                                         <th class="lastcol">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-
+                                    @foreach ($kioskApplications as $index => $kioskApplication)
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center">
 
                                                 <div class="ms-3">
-                                                    <p class="fw-bold mb-1"></p>
+                                                    <p class="fw-bold mb-1">{{ $index + 1 }}</p>
 
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="fw-normal mb-1"></p>
+                                            <p class="fw-normal mb-1">{{ $kioskApplication->kpICNumber }}</p>
 
                                         </td>
                                         <td>
-                                            <p class="fw-normal mb-1"></p>
+                                            @if ($kioskApplication->kInventoryType == 'WaffleMachine')
+                                            <p class="fw-normal mb-1">Waffle Machine</p>
+                                            @elseif ($kioskApplication->kInventoryType == 'CoffeeMachine')
+                                            <p class="fw-normal mb-1">Coffee Machine</p>
+                                            @elseif ($kioskApplication->kInventoryType == 'OdenStove')
+                                            <p class="fw-normal mb-1">Oden Stove</p>
+                                            @endif
                                         </td>
                                         <td>
-
-                                            <span class="badge badge-success rounded-pill d-inline">d</span>
+                                            @if ($kioskApplication->kApplicationStatus == 'Approved')
+                                            <span class="badge badge-success rounded-pill d-inline">{{$kioskApplication->kApplicationStatus}}</span>
+                                            @elseif ($kioskApplication->kApplicationStatus == 'Rejected')
+                                            <span class="badge badge-danger rounded-pill d-inline">{{$kioskApplication->kApplicationStatus}}</span>
+                                            @elseif ($kioskApplication->kApplicationStatus == 'Pending')
+                                            <span class="badge badge-warning rounded-pill d-inline">{{$kioskApplication->kApplicationStatus}}</span>
+                                            @endif
                                         </td>
 
                                         <td>
                                             <div class="btn-group shadow-0" role="group">
                                                 <button type="button" class="btn btn-link" data-mdb-color="dark"><i
                                                         class="fa-solid fa-eye"
-                                                        style="color: #00ff59; font-size: 20px;"></i></button>
-                                                <button type="button" class="btn btn-link" data-mdb-color="dark"><i
-                                                        class="fa-regular fa-pen-to-square"
-                                                        style="color: #624de3; font-size: 20px;"></i></button>
+                                                        style="color: #00ff59; font-size: 20px;" onclick="window.location='{{ route('pupukApplicationApproval', ['id' => $kioskApplication->kApplicationID]) }}'"></i></button>
+                                                @if ($kioskApplication->kApplicationStatus == 'Pending')
                                                 <button type="button" class="btn btn-link" data-mdb-color="dark"
                                                     data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
                                                         class="fa-regular fa-trash-can"
                                                         style="color: #a30d11; font-size: 20px;"></i></button>
-
+                                                @elseif ($kioskApplication->kApplicationStatus == 'Approved' || $kioskApplication->kApplicationStatus == 'Rejected')
+                                                <button type="button" class="btn btn-link" data-mdb-color="dark" disabled><i
+                                                        class="fa-regular fa-trash-can"
+                                                        style="color: #a30d11; font-size: 20px;"></i></button>
+                                                @endif
 
 
                                                 <!-- Modal -->
@@ -161,7 +159,7 @@
                                         </td>
                                     </tr>
 
-
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

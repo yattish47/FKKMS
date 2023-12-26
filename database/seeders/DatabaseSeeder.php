@@ -23,6 +23,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             kiosk_participantSeeder::class
           ]);
-      
+        $this->call([
+            pupuk_adminSeeder::class
+          ]);
+      $this->call([
+        kiosksSeeder::class
+      ]);
     }
 }

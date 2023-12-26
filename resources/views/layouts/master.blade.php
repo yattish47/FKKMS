@@ -77,7 +77,7 @@
                         <a class="dropdown-item" href="#">Settings</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                        <a class="dropdown-item" href="{{route('logout', ['userType' => 'kioskparticipant'])}}">Logout</a>
                     </li>
                 </ul>
             </div>

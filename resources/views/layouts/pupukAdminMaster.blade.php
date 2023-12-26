@@ -31,8 +31,8 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
 <body>
 
   <div class="sidebar">
-    <div class="logo-details">
-      <a href="adminDashboard.html"><img src="{{ url('assets/fkkmsLogo.png') }}" alt="Logo" style="width: 180px;" id="imglogo"/></a>
+    <div class="logo-details mt-2">
+      <a href="{{route('pupukViewListOfApplication')}}"><img src="{{ url('assets/fkkmsLogo.png') }}" alt="Logo" style="width: 180px;" id="imglogo"/></a>
       
       <i class='bx bx-menu' id="btn" ></i>
     </div>
@@ -44,7 +44,7 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
        
        
         <li>
-          <a href="#" class="active">
+          <a href="{{route('pupukViewListOfApplication')}}" class="active">
             <i class="bi bi-file-plus-fill"></i>
             <span class="links_name">Applications</span>
           </a>
@@ -75,7 +75,7 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
           <span class="tooltip">View Profile</span>
         </li>
         <li style="margin-top: 10px;">
-          <a href="#">
+          <a href="{{route('logout', ['userType' => 'pupukAdmin'])}}">
             <i class="fa-solid fa-right-from-bracket"></i>
             <span class="links_name">Logout</span>
           </a>

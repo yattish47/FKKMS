@@ -39,7 +39,7 @@ Route::post('/login', [AccountController::class, 'userAuth'])->name('authenticat
 //Route::get('/signup', [AccountController::class, 'register']);
 Route::post('/signup', [AccountController::class, 'register'])->name('signup');
 
-Route::get('/logout', [AccountController::class, 'logout'])->name('logout');
+Route::get('/logout/{userType}', [AccountController::class, 'logout'])->name('logout');
 
 Route::get('/listOfApplications', [KioskController::class, 'viewListOfApplications'])->name('dashboard');
 
@@ -59,12 +59,10 @@ Route::post('/viewApplication/edit/{id}', [KioskController::class, 'editApplicat
 
 Route::get('/viewApplication/delete/{id}', [KioskController::class, 'deleteApplication'])->name('deleteApplication');
 
-Route::get('/pupuk/listofapplication', function(){
-    return view('ManageKiosk.PUPUKAdmin.listOfApplicationsAndKiosk');
-})->name('pupukViewApplication');
+Route::get('/pupuk/listofapplication', [KioskController::class, 'viewListOfApplicationForPupuk'])->name('pupukViewListOfApplication');
 
 
-Route::get('/pupuk/application-approval', function(){
+Route::get('/pupuk/application-approval/{id}', function(){
     return view('ManageKiosk.PUPUKAdmin.applicationApproval');
 })->name('pupukApplicationApproval');
 

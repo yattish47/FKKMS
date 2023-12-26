@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\kiosk_participant;
+use App\Models\pupuk_admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -32,6 +33,23 @@ class AccountController extends Controller
 
             case 'PUPUK Admin':
                 // Implement logic for PUPUK Admin authentication
+                if($this->manualPupukAdminAuth($username, $password)){
+                    $user = pupuk_admin::where('pICNumber', $username)->first();
+                    $this->manualLogin('pupukadmin', $user);
+
+                    // Check if the user is authenticated
+                    if ($this->manualCheck('pupukadmin')) {
+                        //  $user = $this->manualUser();
+
+                        return redirect()->route('pupukViewListOfApplication');
+                    } else {
+
+                        return redirect()->back()->withErrors(['Invalid credentials']);
+                    }
+                }else {
+
+                    return redirect()->back()->withErrors(['Invalid credentials']);
+                }
                 break;
 
             case 'FK Bursary':
@@ -47,10 +65,10 @@ class AccountController extends Controller
                 if ($this->manualKioskParticipantAuth($username, $password)) {
                     // Authentication successful, create a session
                     $user = kiosk_participant::where('kpICNumber', $username)->first();
-                    $this->manualLogin($user);
+                    $this->manualLogin('kioskparticipant', $user);
 
                     // Check if the user is authenticated
-                    if ($this->manualCheck()) {
+                    if ($this->manualCheck('kioskparticipant')) {
                         //  $user = $this->manualUser();
 
                         return redirect()->route('dashboard');
@@ -100,33 +118,6 @@ class AccountController extends Controller
     }
 
 
-
-    // Additional functions for specific user types
-    // private function kioskParticipantAuth($username, $password)
-    // {
-
-    //     // Check the 'kiosk_participants' table with the provided username and password
-
-    //     // $user = kiosk_participant::where('kpUsername', $username)->first();
-
-    //     //     if (!$user || !Hash::check($password, $user->kpPassword)) {
-    //     //         return false;
-    //     //     }else{
-    //     //         return true;}
-    //     $credentials = ['kpUsername' => $username, 'password' => $password];
-
-    //     if (Auth::attempt($credentials)) {
-    //         // Authentication successful
-    //         $user = Auth::user();
-    //                 dd($user);
-    //         dd('Authentication successful');
-    //         return true;
-    //     } else {
-    //         // Authentication failed
-    //         dd('Authentication failed');
-    //         return false;
-    //     }
-    // }
     private function manualKioskParticipantAuth($username, $password)
     {
         // Check the 'kiosk_participants' table with the provided username and password
@@ -140,24 +131,49 @@ class AccountController extends Controller
             return false;
         }
     }
+    private function manualPupukAdminAuth($username, $password)
+    {
+        // Check the 'kiosk_participants' table with the provided username and password
+        $user = pupuk_admin::where('pICNumber', $username)->first();
 
-    private function manualLogin($user)
+        if ($user && Hash::check($password, $user->pAdminPassword)) {
+            // Authentication successful
+            return true;
+        } else {
+            // Authentication failed
+            return false;
+        }
+    }
+
+    private function manualLogin($userType,$user)
     {
         // Manually log in the user
-        session(['kioskparticipant' => $user->kpICNumber]);
+        if($userType == 'kioskparticipant'){
+            session(['kioskparticipant' => $user->kpICNumber]);
+        }elseif($userType == 'pupukadmin'){
+            session(['pupukadmin' => $user->pICNumber]);
+        }
+        
     }
 
-    private function manualCheck()
+    private function manualCheck($userType)
     {
         // Check if the user is logged in
-        return session()->has('kioskparticipant');
+        if($userType == 'kioskparticipant'){
+            return session()->has('kioskparticipant');
+        }elseif($userType == 'pupukadmin'){
+        return session()->has('pupukadmin');
+        }
     }
 
 
-    public function logout()
+    public function logout($userType)
     {
-        session()->forget('kioskparticipant');
-
+        if($userType == 'kioskparticipant'){
+            session()->forget('kioskparticipant');
+        }elseif($userType == 'pupukAdmin'){
+            session()->forget('pupukadmin');
+        }
         // Redirect to the login page or another page
         return redirect()->route('login');
     }
