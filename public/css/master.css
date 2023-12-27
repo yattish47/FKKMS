@@ -4,9 +4,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 body{
     background-color: rgb(230, 230, 230);
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 .navbar{
     font-family: 'Karla', sans-serif;
@@ -52,3 +56,30 @@ footer {
 
 }
 
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+   
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #838383;
+    border-radius: 15px;
+    border: 0.5px solid #000000;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #f6eba7 0%, #8552fb 50%);
+  }

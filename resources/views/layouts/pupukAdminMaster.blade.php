@@ -32,7 +32,7 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
 
   <div class="sidebar">
     <div class="logo-details mt-2">
-      <a href="{{route('pupukViewListOfApplication')}}"><img src="{{ url('assets/fkkmsLogo.png') }}" alt="Logo" style="width: 180px;" id="imglogo"/></a>
+      <a href="{{route('pupukViewListOfApplication')}}"><img src="{{ url('assets/fkkmsLogo.png') }}" alt="Logo" style="width: 180px;" loading="lazy" id="imglogo"/></a>
       
       <i class='bx bx-menu' id="btn" ></i>
     </div>
@@ -89,6 +89,23 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
   <section class="home-section">
   @yield('content')
   </section>
+     <!-- Modal -->
+     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="staticBackdropLabel">Are You Sure You Want to Delete This User?</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+
+             <div class="modal-footer d-flex justify-content-center">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                 <button type="button" class="btn btn-danger" id="confirmDelete">Yes</button>
+             </div>
+         </div>
+     </div>
+ </div>
   <footer class="text-center text-white fixed-bottom overflow-hidden" style="background-color: #21081a; margin-top: 20px;">
         
       
@@ -144,6 +161,6 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
 
   
   </script>
-  
+
 </body>
 </html>

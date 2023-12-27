@@ -65,13 +65,14 @@ Route::get('/viewApplication/delete/{id}', [KioskController::class, 'deleteAppli
 Route::get('/pupuk/listofapplication', [KioskController::class, 'viewListOfApplicationForPupuk'])->name('pupukViewListOfApplication');
 
 
-Route::get('/pupuk/application-approval/{id}', function(){
-    return view('ManageKiosk.PUPUKAdmin.applicationApproval');
-})->name('pupukApplicationApproval');
+Route::get('/pupuk/application-approval/{id}/{from}', [KioskController::class, 'viewApplicationForPupuk'])->name('pupukApplicationApproval');
 
-Route::get('/pupuk/view-application', function(){
-    return view('ManageKiosk.PUPUKAdmin.viewApplication');
-})->name('pupukViewApplication');
+Route::post('/pupuk/application-approval/{id}', [KioskController::class, 'applicationApprovalForPupuk'])->name('applicationApprovalForPupuk');
+
+
+Route::get('/pupuk/view-application/{id}/{from}', [KioskController::class, 'viewApplicationForPupuk'])->name('pupukViewApplication');
+
+Route::get('/pupuk/delete-application/{id}', [KioskController::class, 'deleteApplicationForPupuk'])->name('pupukDeleteApplication');
 
 Route::get('/sales/create', [SalesController::class, 'create'])->name('ManageReport.KioskParticipant.addSales');
 Route::post('/sales/store', [SalesController::class, 'store'])->name('ManageReport.KioskParticipant.addSales');

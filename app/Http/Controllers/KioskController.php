@@ -110,7 +110,7 @@ class KioskController extends Controller
 
     public function deleteApplication($id){
         kiosk_applications::where('kApplicationID', $id)->delete();
-        return $this->viewListOfApplications();
+        return redirect()->route('dashboard');
     }
 
 
@@ -119,5 +119,44 @@ class KioskController extends Controller
         $kiosks = kiosks::all();
         
         return view('ManageKiosk.PUPUKAdmin.listOfApplicationsAndKiosk', ['kioskApplications' => $kioskApplications, 'kiosks' => $kiosks]);
+    }
+
+
+    public function viewApplicationForPupuk($id, $from){
+        $kioskApplication = kiosk_applications::where('kApplicationID', $id)->first();
+
+        $kioskParticipant = kiosk_participant::where('kpICNumber', $kioskApplication->kpICNumber)->first();
+        if($from == 'approve'){
+            return view('ManageKiosk.PUPUKAdmin.applicationApproval', ['kioskApplication' => $kioskApplication, 'kioskParticipant' => $kioskParticipant]);
+        }elseif($from == 'view'){
+            return view('ManageKiosk.PUPUKAdmin.viewApplication', ['kioskApplication' => $kioskApplication, 'kioskParticipant' => $kioskParticipant]);
+        }
+    }
+
+
+    public function applicationApprovalForPupuk($id, Request $request){
+        kiosk_applications::where('kApplicationID', $id)->update([
+            'kApplicationStatus' => $request->input('kApplicationStatus'),
+            'kApprovalRemark' => $request->input('kApprovalRemark'),
+        ]);
+
+        $emptyKiosk = kiosks::whereNull('kApplicationID')->whereNull('kpICNumber')->first();
+        $kpICNumber = kiosk_applications::where('kApplicationID', $id)->first()->kpICNumber;
+        if ($emptyKiosk) {
+            $emptyKiosk->update([
+                'kApplicationID' => $id,
+                'kpICNumber' => $kpICNumber, 
+            ]);
+        } else {
+            // Handle the case when there are no empty rows
+            // You may want to insert a new row or handle it based on your requirements
+        }
+        return redirect()->route('pupukViewListOfApplication');
+        
+    }
+
+    public function deleteApplicationForPupuk($id){
+        kiosk_applications::where('kApplicationID', $id)->delete();
+        return redirect()->route('pupukViewListOfApplication');
     }
 }

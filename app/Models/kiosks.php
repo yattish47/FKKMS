@@ -9,6 +9,8 @@ class kiosks extends Model
 {
     use HasFactory;
     protected $table = 'kiosks';
+    protected $primaryKey = 'kioskID'; // Add this line
+    public $incrementing = false;
     protected $fillable = [		
         'kioskID',
         'kApplicationID',
