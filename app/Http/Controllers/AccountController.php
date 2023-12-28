@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\kiosk_participant;
 use App\Models\pupuk_admin;
+use App\Models\admin;
+use App\Models\fk_bursary;
+use App\Models\fk_technicalteam;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,6 +32,24 @@ class AccountController extends Controller
         switch ($userType) {
             case 'Admin':
                 // Implement logic for Admin authentication
+                
+                if($this->manualAdminAuth($username, $password)){
+                    $user = admin::where('admin_ID', $username)->first();
+                    $this->manualLogin('admin', $user);
+
+                    // Check if the user is authenticated
+                    if ($this->manualCheck('admin')) {
+                        //  $user = $this->manualUser();
+
+                       // return redirect()->route('pupukViewListOfApplication');
+                    } else {
+
+                        return redirect()->back()->withErrors(['Invalid credentials']);
+                    }
+                }else {
+
+                    return redirect()->back()->withErrors(['Invalid credentials']);
+                }
                 break;
 
             case 'PUPUK Admin':
@@ -54,10 +75,44 @@ class AccountController extends Controller
 
             case 'FK Bursary':
                 // Implement logic for FK Bursary authentication
+                if($this->manualBursaryAuth($username, $password)){
+                    $user = fk_bursary::where('bursaryICNumber', $username)->first();
+                    $this->manualLogin('bursary', $user);
+
+                    // Check if the user is authenticated
+                    if ($this->manualCheck('bursary')) {
+                        //  $user = $this->manualUser();
+
+                      //  return redirect()->route('pupukViewListOfApplication');
+                    } else {
+
+                        return redirect()->back()->withErrors(['Invalid credentials']);
+                    }
+                }else {
+
+                    return redirect()->back()->withErrors(['Invalid credentials']);
+                }
                 break;
 
             case 'FK Technical Team':
                 // Implement logic for FK Technical Team authentication
+                if($this->manualTechTeamAuth($username, $password)){
+                    $user = fk_technicalteam::where('ttICNumber', $username)->first();
+                    $this->manualLogin('techteam', $user);
+
+                    // Check if the user is authenticated
+                    if ($this->manualCheck('techteam')) {
+                        //  $user = $this->manualUser();
+
+                      //  return redirect()->route('pupukViewListOfApplication');
+                    } else {
+
+                        return redirect()->back()->withErrors(['Invalid credentials']);
+                    }
+                }else {
+
+                    return redirect()->back()->withErrors(['Invalid credentials']);
+                }
                 break;
 
             case 'Kiosk Participant':
@@ -144,7 +199,47 @@ class AccountController extends Controller
             return false;
         }
     }
+    private function manualAdminAuth($username, $password)
+    {
+        // Check the 'kiosk_participants' table with the provided username and password
+        $user = admin::where('admin_ID', $username)->first();
 
+        if ($user && Hash::check($password, $user->adminPassword)) {
+            // Authentication successful
+            return true;
+        } else {
+            // Authentication failed
+            return false;
+        }
+    }
+    private function manualBursaryAuth($username, $password)
+    {
+        // Check the 'kiosk_participants' table with the provided username and password
+        $user = fk_bursary::where('bursaryICNumber', $username)->first();
+
+        if ($user && Hash::check($password, $user->bursaryPassword)) {
+            // Authentication successful
+            return true;
+        } else {
+            // Authentication failed
+            return false;
+        }
+    }
+    private function manualTechTeamAuth($username, $password)
+    {
+        // Check the 'kiosk_participants' table with the provided username and password
+        $user = fk_technicalteam::where('ttICNumber', $username)->first();
+
+        if ($user && Hash::check($password, $user->ttPassword)) {
+            // Authentication successful
+            return true;
+        } else {
+            // Authentication failed
+            return false;
+        }
+    }
+
+    
     private function manualLogin($userType,$user)
     {
         // Manually log in the user
@@ -152,6 +247,12 @@ class AccountController extends Controller
             session(['kioskparticipant' => $user->kpICNumber]);
         }elseif($userType == 'pupukadmin'){
             session(['pupukadmin' => $user->pICNumber]);
+        }elseif($userType == 'admin'){
+            session(['admin' => $user->admin_ID]);
+        }elseif($userType == 'bursary'){
+            session(['bursary' => $user->bursaryICNumber]);
+        }elseif($userType == 'techteam'){
+            session(['techteam' => $user->ttICNumber]);
         }
         
     }
@@ -163,6 +264,12 @@ class AccountController extends Controller
             return session()->has('kioskparticipant');
         }elseif($userType == 'pupukadmin'){
         return session()->has('pupukadmin');
+        }elseif($userType == 'admin'){
+            return session()->has('admin');
+        }elseif($userType == 'bursary'){
+            return session()->has('bursary');
+        }elseif($userType == 'techteam'){
+            return session()->has('techteam');
         }
     }
 
@@ -173,6 +280,12 @@ class AccountController extends Controller
             session()->forget('kioskparticipant');
         }elseif($userType == 'pupukAdmin'){
             session()->forget('pupukadmin');
+        }elseif($userType == 'admin'){
+            session()->forget('admin');
+        }elseif($userType == 'bursary'){
+            session()->forget('bursary');
+        }elseif($userType == 'techteam'){
+            session()->forget('techteam');
         }
         // Redirect to the login page or another page
         return redirect()->route('login');

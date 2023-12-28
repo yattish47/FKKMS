@@ -29,5 +29,14 @@ class DatabaseSeeder extends Seeder
       $this->call([
         kiosksSeeder::class
       ]);
+      $this->call([
+        adminSeeder::class
+      ]);
+      $this->call([
+        fk_bursarySeeder::class
+      ]);
+      $this->call([
+        fk_technicalteamSeeder::class
+      ]);
     }
 }
