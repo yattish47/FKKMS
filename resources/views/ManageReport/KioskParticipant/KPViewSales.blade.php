@@ -29,7 +29,7 @@
                 <th>Month</th>
                 <th>Year</th>
                 <!-- Add other headers for your attributes -->
-                <th>Total Price</th>
+                <th>Total Sales</th>
                 <th>Created At</th>
                 <th>Updated At</th>
                 <th>Actions</th> <!-- Add a new column for actions -->

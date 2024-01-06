@@ -51,7 +51,7 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
           <span class="tooltip">Applications</span>
         </li>
         <li>
-          <a href="#">
+          <a href="{{route('PadminViewSales')}}" class="active">
             <i class="bi bi-bar-chart-fill"></i>
             <span class="links_name">Sales</span>
           </a>

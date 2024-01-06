@@ -115,4 +115,29 @@ class SalesController extends Controller
 
         return view('ManageReport.KioskParticipant.KPViewSales', compact('reports'));
     }
+
+    public function PadminView()
+{
+    $reports = SalesRecord::all(); // Fetch all reports (modify as needed)
+
+    return view('ManageReport/PUPUKAdmin/PAdminViewSales', compact('reports'));
+}
+
+public function filterPAdmin(Request $request)
+    {
+        $query = SalesRecord::query();
+
+        if ($request->filled('year')) {
+            $query->where('year', $request->input('year'));
+        }
+
+        if ($request->filled('month')) {
+            $query->where('month', $request->input('month'));
+        }
+
+        $reports = $query->get();
+
+        return view('ManageReport.PUPUKAdmin.PAdminViewSales', compact('reports'));
+    }
+
 }

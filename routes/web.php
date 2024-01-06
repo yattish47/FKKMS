@@ -89,3 +89,7 @@ Route::get('/ManageReport/KioskParticipant/{ReportID}/edit', [SalesController::c
 Route::put('/ManageReport/KioskParticipant/{ReportID}/update', [SalesController::class, 'update'])->name('reports.update');
 
 Route::get('/ManageReport/KioskParticipant/{ReportID}/delete', [SalesController::class, 'destroy']);
+
+Route::get('/ManageReport/PUPUKAdmin/PAdminViewSales', [SalesController::class, 'PadminView'])->name('PadminViewSales');
+
+Route::get('/reports-filterPAdmin', [SalesController::class, 'filterPAdmin'])->name('reports.filterPAdmin');
