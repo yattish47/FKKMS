@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\SalesRecord;
 
 class SalesController extends Controller
 {
+    public function index()
+    {
+        $reports = SalesRecord::select('ReportID', 'year', 'month', 'totalPrice', 'created_at', 'updated_at')->get();
+        return view('ManageReport.KioskParticipant.KPViewSales', compact('reports'));
+    }
+
     public function create()
     {
         return view('ManageReport.KioskParticipant.addSales');
@@ -14,83 +21,98 @@ class SalesController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'year' => 'required|integer',
-            'month' => 'required|integer',
-            'week' => 'required|integer',
-            'monday' => 'required|string',
-            'tuesday' => 'required|string',
-            'wednesday' => 'required|string',
-            'thursday' => 'required|string',
-            'friday' => 'required|string',
-            'saturday' => 'required|string',
-            'sunday' => 'required|string',
+        $validator = Validator::make($request->all(), [
+            'year' => 'required',
+            'month' => 'required',
+            'week' => 'required',
+            'monday' => 'required',
+            'tuesday' => 'required',
+            'wednesday' => 'required',
+            'thursday' => 'required',
+            'friday' => 'required',
+            'saturday' => 'required',
+            'sunday' => 'required',
+            'totalPrice' => 'required'
         ]);
 
-        // Create a new SalesRecord instance and fill it with the validated data
-        $salesRecord = new SalesRecord([
-            'year' => $request->input('year'),
-            'month' => $request->input('month'),
-            'week' => $request->input('week'),
-            'monday' => $request->input('monday'),
-            'tuesday' => $request->input('tuesday'),
-            'wednesday' => $request->input('wednesday'),
-            'thursday' => $request->input('thursday'),
-            'friday' => $request->input('friday'),
-            'saturday' => $request->input('saturday'),
-            'sunday' => $request->input('sunday'),
-        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-        // Save the sales record to the database
-        $salesRecord->save();
+        SalesRecord::create($request->all());
 
-        // Redirect to the sales create page with a success message
-        return redirect()->route('ManageReport.KioskParticipant.KPViewSales')->with('success', 'Sales record added successfully');
+        return redirect()->route('reports')->with('success', 'Sales record added successfully');
     }
 
-    public function update(Request $request, $id)
+        public function edit($ReportID)
     {
-        // Validate the incoming request data
-        $request->validate([
-            'year' => 'required|integer',
-            'month' => 'required|integer',
-            'week' => 'required|integer',
-            'monday' => 'required|string',
-            'tuesday' => 'required|string',
-            'wednesday' => 'required|string',
-            'thursday' => 'required|string',
-            'friday' => 'required|string',
-            'saturday' => 'required|string',
-            'sunday' => 'required|string',
-        ]);
+        try {
+            // Find the sales record by ID
+            $salesRecord = SalesRecord::findOrFail($ReportID);
 
-        // Find the sales record by ID
-        $salesRecord = SalesRecord::findOrFail($id);
-
-        // Update the sales record with the validated data
-        $salesRecord->update([
-            'year' => $request->input('year'),
-            'month' => $request->input('month'),
-            'week' => $request->input('week'),
-            'monday' => $request->input('monday'),
-            'tuesday' => $request->input('tuesday'),
-            'wednesday' => $request->input('wednesday'),
-            'thursday' => $request->input('thursday'),
-            'friday' => $request->input('friday'),
-            'saturday' => $request->input('saturday'),
-            'sunday' => $request->input('sunday'),
-        ]);
-
-        // Redirect back to the sales update page with a success message
-        return redirect()->route('ManageReport.KioskParticipant.updateSales', ['id' => $salesRecord->id])->with('success', 'Sales record updated successfully');
+            // Pass the record to the view
+            return view('ManageReport.KioskParticipant.updateSales', compact('salesRecord'));
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            // Handle the case where the record is not found
+            return redirect()->route('reports')->with('error', 'Sales record not found');
+        }
     }
 
-    public function destroy($id)
+    public function update(Request $request, $ReportID)
     {
-        // Add logic for deleting sales records
-        // You can retrieve the record using SalesRecord::find($id) and perform the deletion
-        // Example: $record = SalesRecord::find($id); $record->delete();
-        // Redirect or return a response
+        $validator = Validator::make($request->all(), [
+            'year' => 'required',
+            'month' => 'required',
+            'week' => 'required',
+            'monday' => 'required',
+            'tuesday' => 'required',
+            'wednesday' => 'required',
+            'thursday' => 'required',
+            'friday' => 'required',
+            'saturday' => 'required',
+            'sunday' => 'required',
+            // Add validation rules for other fields
+            'totalPrice' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $salesRecord = SalesRecord::findOrFail($ReportID);
+        $salesRecord->update($request->all());
+
+        return redirect()->route('reports')->with('success', 'Sales record updated successfully');
+    }
+
+    public function destroy(Request $request, $ReportID)
+    {
+        // Add debugging statement
+        \Log::info("Deleting SalesRecord with ID: $ReportID");
+    
+        SalesRecord::destroy($ReportID);
+    
+        // Add debugging statement
+        \Log::info("SalesRecord deleted successfully");
+    
+        return redirect()->route('reports')->with('success', 'Sales record deleted successfully');
+    }
+    
+
+    public function filter(Request $request)
+    {
+        $query = SalesRecord::query();
+
+        if ($request->filled('year')) {
+            $query->where('year', $request->input('year'));
+        }
+
+        if ($request->filled('month')) {
+            $query->where('month', $request->input('month'));
+        }
+
+        $reports = $query->get();
+
+        return view('ManageReport.KioskParticipant.KPViewSales', compact('reports'));
     }
 }
-

@@ -45,11 +45,12 @@
                 </a>
                 <!-- Left links -->
                 <ul class="navbar-nav ms-auto mb-2 me-2 mb-lg-0" style="width: 38%">
-                    <li class="nav-item me-4">
-                        <a class="nav-link {{ request()->routeIs('ManageReport.KioskParticipant.addSales') ? 'active' : '' }}" href="{{ route('ManageReport.KioskParticipant.addSales') }}">
-                            <i class="bi bi-bar-chart-fill me-2"></i>SALES
-                        </a>
-                    </li>
+                <li class="nav-item me-4">
+                    <a class="nav-link {{ request()->routeIs('/managereport') ? 'active' : '' }}" href="{{ route('reports') }}">
+                        <i class="bi bi-bar-chart-fill me-2"></i>SALES
+                    </a>
+                </li>
+
                     <li class="nav-item me-4">
                         <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard')}}"><i class="bi bi-file-plus-fill  me-2"></i>APPLICATION</a>
                     </li>

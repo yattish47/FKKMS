@@ -74,8 +74,18 @@ Route::get('/pupuk/view-application/{id}/{from}', [KioskController::class, 'view
 
 Route::get('/pupuk/delete-application/{id}', [KioskController::class, 'deleteApplicationForPupuk'])->name('pupukDeleteApplication');
 
-Route::get('/sales/create', [SalesController::class, 'create'])->name('ManageReport.KioskParticipant.addSales');
-Route::post('/sales/store', [SalesController::class, 'store'])->name('ManageReport.KioskParticipant.addSales');
-// Update sales record
-Route::put('/{id}', [SalesController::class, 'update'])->name('ManageReport.KioskParticipant.updateSales');
-Route::delete('/sales/delete/{id}', [SalesController::class, 'destroy'])->name('sales.delete');
+
+
+Route::get('/ManageReport/KioskParticipant/KPViewSales', [SalesController::class, 'index'])->name('reports');
+
+Route::post('/ManageReport/KioskParticipant/addSales', [SalesController::class, 'store'])->name('reports.store');
+
+Route::get('/ManageReport/KioskParticipant/addSales', function () {return view('ManageReport.KioskParticipant.addSales');})->name('view');
+
+Route::get('/reports-filter', [SalesController::class, 'filter'])->name('reports.filter');
+
+Route::get('/ManageReport/KioskParticipant/{ReportID}/edit', [SalesController::class, 'edit'])->name('reports.edit');
+
+Route::put('/ManageReport/KioskParticipant/{ReportID}/update', [SalesController::class, 'update'])->name('reports.update');
+
+Route::get('/ManageReport/KioskParticipant/{ReportID}/delete', [SalesController::class, 'destroy']);
