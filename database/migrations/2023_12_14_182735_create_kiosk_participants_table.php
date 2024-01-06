@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('kpEmail', 55);
             $table->string('kpType', 20);
             $table->string('kpPhoneNumber', 30);
-            $table->string('kpMatricID', 10);
+            $table->string('kpMatricID', 10)->nullable();
             $table->string('kpNationality', 50);
             $table->integer('kpAge');
             $table->string('kpPassword', 255);
