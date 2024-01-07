@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('payment_record', function (Blueprint $table) {
             $table->bigIncrements('paymentID')->primary;
-            $table->foreign('kioskID', 10)->reference('kisokID',10)->on('kiosks')->onDelete('cascade');//foreing key from kiosk table
+            $table->string('kioskID',10);
+            $table->foreign('kioskID')->references('kisokID')->on('kiosks')->onDelete('cascade');//foreing key from kiosk table
             $table->dateTime('payDate',$precision = 0);
             $table->string('payDetail', 100);
             $table->binary('payProof');
             $table->binary('payQR');
             $table->binary('payInovice');
             $table->string('payStatus', 20);
-            $table->timestamps();
+            $table->timestamps(); // Created_at and updated_at columns
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_record');
+        Schema::dropIfExists('paymentRecord');
     }
 };
