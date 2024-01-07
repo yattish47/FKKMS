@@ -5,16 +5,16 @@
 @section('content')
 
 <style>
-    /* Add custom styles for layout */
+
     .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px; /* Adjust the margin-top value as needed */
-}
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px; 
+    }
+
     .form-group {
         width: calc(15% - 10px);
-        /* Adjust the width as needed */
         margin-bottom: 20px;
         box-sizing: border-box;
     }
@@ -27,7 +27,7 @@
         padding: 20px;
         box-sizing: border-box;
         text-align: center;
-        /* Center the content horizontally */
+        border-radius: 10px; 
     }
 
     .day-group {
@@ -45,6 +45,10 @@
     .day-input {
         width: 45%;
         box-sizing: border-box;
+        color: #000; 
+        background-color: #D2D6FB; 
+        padding: 5px; 
+        border-radius: 5px; 
     }
 
     #salesForm {
@@ -63,21 +67,25 @@
         /* Adjust the width as needed */
         box-sizing: border-box;
         margin-bottom: 10px;
+        background-color: #D2D6FB;
+        border-radius: 5px; /* Add border-radius for rounded corners */
     }
 
     #generateButton {
         width: 6%;
         /* Adjust the width as needed */
         box-sizing: border-box;
+        color: #000;
+        background-color: #D2D6FB;
+        border-radius: 5px; /* Add border-radius for rounded corners */
     }
-    
-
 </style>
 
 <form id="salesForm" method="POST" action="{{ route('reports.store') }}">
     @csrf
 
     <div class="container">
+    
         <div class="form-group">
             <label for="year">Year:</label>
             <select name="year" required>
@@ -107,7 +115,7 @@
 
     <div class="days-container">
         @php
-        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         @endphp
 
         @foreach($days as $day)
@@ -126,12 +134,12 @@
     <!-- Rest of the form -->
 
     <div class="total-container">
-        <label for="totalPrice">Total Sales:</label>
+        <label for="totalPrice">TOTAL SALES:</label>
         <input type="text" name="totalPrice" id="totalPrice" readonly>
     </div>
 
     <div class="total-container">
-        <button type="submit" id="generateButton">Generate</button>
+        <button type="submit" id="generateButton">GENERATE</button>
     </div>
 
 </form>

@@ -9,17 +9,13 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        margin-top: 20px; /* Adjust the margin-top value as needed */
+        margin-top: 20px;
     }
 
     .form-group {
-        width: 30%; /* Adjust the width as needed */
+        width: calc(30% - 10px);
         margin-bottom: 20px;
         box-sizing: border-box;
-    }
-
-    .form-group:not(:last-child) {
-        margin-right: 20px; /* Adjust the space between fields */
     }
 
     .days-container {
@@ -30,7 +26,8 @@
         padding: 20px;
         box-sizing: border-box;
         text-align: center;
-        /* Center the content horizontally */
+        border-radius: 10px;
+        overflow: hidden;
     }
 
     .day-group {
@@ -47,22 +44,35 @@
 
     .day-input {
         width: 45%;
+        color: #000;
+        background-color: #D2D6FB;
+        padding: 5px;
+        border-radius: 5px;
         box-sizing: border-box;
     }
 
     .total-container {
         text-align: center;
         margin-top: 20px;
-        /* Adjust the margin as needed */
+    }
+
+    #updateButton {
+        width: 6%;
+        box-sizing: border-box;
+        color: #000;
+        background-color: #D2D6FB;
+        border-radius: 5px;
     }
 
     #totalPrice {
         width: 10%;
-        /* Adjust the width as needed */
+        background-color: #D2D6FB;
         box-sizing: border-box;
         margin-bottom: 10px;
+        border-radius: 5px;
     }
 </style>
+
 
 <div class="container">
     <form method="POST" action="{{ route('reports.update', ['ReportID' => $salesRecord->ReportID]) }}">
@@ -82,17 +92,14 @@
 
         <div class="form-group">
             <label for="week">Week:</label>
-            <select name="week" required>
-                @for ($week = 1; $week <= 5; $week++)
-                    <option value="{{ $week }}">Week {{ $week }}</option>
-                @endfor
-            </select>
+            <input type="text" name="week" value="{{ $salesRecord->week }}" required>
         </div>
+    </div>
     </div>
 
     <div class="days-container">
         @php
-            $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         @endphp
 
         @foreach($days as $day)
@@ -135,7 +142,7 @@
     </script>
 
     <div class="total-container">
-        <button type="submit">UPDATE</button>
+        <button type="submit" id="updateButton">UPDATE</button>
     </div>
     </form>
 </div>
