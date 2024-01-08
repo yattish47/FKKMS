@@ -50,17 +50,17 @@ class ComplaintController extends Controller
 
     public function techComplaint(){
         $q=Complaint::get();
-        return view('Complaint/IndexTech',['data'=>$q]);
+        return view('ManageComplaint\TechnicalTeam\listOfComplaints',['data'=>$q]);
     }
     public function techViewComplaint($id){
         $q=Complaint::where('id',$id)
         ->first();
-        return view('Complaint/TechViewComplaint',['data'=>$q]);
+        return view('ManageComplaint\TechnicalTeam\techViewComplaint',['data'=>$q]);
     }
     public function techEditComplaint($id){
         $q=Complaint::where('id',$id)
         ->first();
-        return view('Complaint/TechEditComplaint',['data'=>$q]);
+        return view('ManageComplaint\TechnicalTeam\techEditComplaint',['data'=>$q]);
     }
     public function statusComplaint($id, $status){
         Complaint::where('id',$id)
@@ -70,7 +70,7 @@ class ComplaintController extends Controller
 
             $r=Complaint::where('id',$id)
             ->first();
-            return view('Complaint/TechEditComplaint',['data'=>$r]);
+            return view('ManageComplaint\TechnicalTeam\techEditComplaint',['data'=>$r]);
 
     }
 }

@@ -18,7 +18,7 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
 <!-- Custom CSS -->
-<link rel="stylesheet" href="{{ asset('css/pupukAdminMaster.css') }}">
+<link rel="stylesheet" href="{{ asset('css/technicalTeamMaster.css') }}">
 
 <link rel="icon" type="image/x-icon" href="{{ asset('assets/fkkmsLogo.png') }}">
     <!-- Boxicons CDN Link -->
@@ -32,7 +32,7 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
 
   <div class="sidebar">
     <div class="logo-details mt-2">
-      <a href="{{route('pupukViewListOfApplication')}}"><img src="{{ url('assets/fkkmsLogo.png') }}" alt="Logo" style="width: 180px;" loading="lazy" id="imglogo"/></a>
+      <a href="{{route('techcomplaintlist')}}"><img src="{{ url('assets/fkkmsLogo.png') }}" alt="Logo" style="width: 180px;" loading="lazy" id="imglogo"/></a>
       
       <i class='bx bx-menu' id="btn" ></i>
     </div>
@@ -44,20 +44,14 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
        
        
         <li>
-          <a href="{{route('pupukViewListOfApplication')}}" class="active">
+          <a href="{{route('techcomplaintlist')}}" class="active">
             <i class="bi bi-file-plus-fill"></i>
-            <span class="links_name">Applications</span>
+            <span class="links_name">Complaint List</span>
           </a>
-          <span class="tooltip">Applications</span>
+          <span class="tooltip">Complaint List</span>
         </li>
         <li>
-          <a href="{{route('PadminViewSales')}}">
-            <i class="bi bi-bar-chart-fill"></i>
-            <span class="links_name">Sales</span>
-          </a>
-          <span class="tooltip">Sales</span>
-        </li>
-        
+          
        
         
       </ul>
@@ -106,7 +100,7 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
          </div>
      </div>
  </div>
-  <footer class="text-center text-white fixed-bottom overflow-hidden" style="background-color: #21081a; margin-top: 20px;">
+  <footer class="text-center text-white fixed-bottom overflow-hidden" style="background-color: #A1BCF0; margin-top: 20px;">
         
       
     <!-- Copyright -->

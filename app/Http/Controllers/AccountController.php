@@ -104,7 +104,7 @@ class AccountController extends Controller
                     if ($this->manualCheck('techteam')) {
                         //  $user = $this->manualUser();
 
-                      //  return redirect()->route('pupukViewListOfApplication');
+                      return redirect()->route('techcomplaintlist');
                     } else {
 
                         return redirect()->back()->withErrors(['Invalid credentials']);

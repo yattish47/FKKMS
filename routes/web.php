@@ -109,7 +109,7 @@ Route::post('/kiosk/addComplaint',[ComplaintController::class,'addComplaint']);
 Route::post('/kiosk/updateComplaint',[ComplaintController::class,'updateComplaint']);
 Route::get('/kiosk/deleteComplaint/{id}',[ComplaintController::class,'deleteComplaint']);
 
-Route::get('/tech/complaint',[ComplaintController::class,'techComplaint']);
+Route::get('/tech/complaint',[ComplaintController::class,'techComplaint'])->name('techcomplaintlist');
 Route::post('/tech/addComplaint',[ComplaintController::class,'addComplaint']);
 Route::post('/tech/updateComplaint',[ComplaintController::class,'updateComplaint']);
 Route::get('/tech/deleteComplaint/{id}',[ComplaintController::class,'deleteComplaint']);
