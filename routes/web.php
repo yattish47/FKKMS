@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\KioskController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\ComplaintController;
 
 
 /*
@@ -93,3 +94,25 @@ Route::get('/ManageReport/KioskParticipant/{ReportID}/delete', [SalesController:
 Route::get('/ManageReport/PUPUKAdmin/PAdminViewSales', [SalesController::class, 'PadminView'])->name('PadminViewSales');
 
 Route::get('/reports-filterPAdmin', [SalesController::class, 'filterPAdmin'])->name('reports.filterPAdmin');
+
+
+
+
+//complaint module
+Route::get('/complaintlist', [ComplaintController::class, 'index'])->name('complaintlist');
+
+Route::get('/kiosk/complaint',[ComplaintController::class,'index']);
+Route::get('/kiosk/newApplication',[ComplaintController::class,'newApplication']);
+Route::get('/viewComplaint/{id}',[ComplaintController::class,'viewComplaint']);
+Route::get('/kiosk/updateComplaints/{id}',[ComplaintController::class,'updateComplaints']);
+Route::post('/kiosk/addComplaint',[ComplaintController::class,'addComplaint']);
+Route::post('/kiosk/updateComplaint',[ComplaintController::class,'updateComplaint']);
+Route::get('/kiosk/deleteComplaint/{id}',[ComplaintController::class,'deleteComplaint']);
+
+Route::get('/tech/complaint',[ComplaintController::class,'techComplaint']);
+Route::post('/tech/addComplaint',[ComplaintController::class,'addComplaint']);
+Route::post('/tech/updateComplaint',[ComplaintController::class,'updateComplaint']);
+Route::get('/tech/deleteComplaint/{id}',[ComplaintController::class,'deleteComplaint']);
+Route::get('/tech/viewComplaint/{id}',[ComplaintController::class,'techViewComplaint']);
+Route::get('/tech/editComplaint/{id}',[ComplaintController::class,'techEditComplaint']);
+Route::get('/tech/statusComplaint/{id}/{status}',[ComplaintController::class,'statusComplaint']);

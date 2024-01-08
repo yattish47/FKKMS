@@ -55,7 +55,8 @@
                         <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard')}}"><i class="bi bi-file-plus-fill  me-2"></i>APPLICATION</a>
                     </li>
                     <li class="nav-item me-4">
-                        <a class="nav-link" href="#"><i class="bi bi-pen-fill  me-2"></i>COMPLAINTS</a>
+                        <a class="nav-link {{ request()->routeIs('complaintlist') ? 'active' : '' }}" href="{{ route('complaintlist')}}"><i class="bi bi-pen-fill  me-2"></i>COMPLAINTS</a>
+                        
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="bi bi-credit-card-fill  me-2"></i>PAYMENT</a>

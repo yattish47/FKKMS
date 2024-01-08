@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payment_record', function (Blueprint $table) {
             $table->bigIncrements('paymentID')->primary;
             $table->string('kioskID',10);
-            $table->foreign('kioskID')->references('kisokID')->on('kiosks')->onDelete('cascade');//foreing key from kiosk table
+            $table->foreign('kioskID')->references('kioskID')->on('kiosks')->onDelete('cascade');//foreing key from kiosk table
             $table->dateTime('payDate',$precision = 0);
             $table->string('payDetail', 100);
             $table->binary('payProof');
