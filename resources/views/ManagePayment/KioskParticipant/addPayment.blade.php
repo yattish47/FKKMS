@@ -1,8 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-<link rel="stylesheet" href="{{ asset('css/ManageKiosk/viewApplication.css') }}"> <!-- insert css -->
-
+<link rel="stylesheet" href="{{ asset('css/ManagePayment/addPayment.css') }}"> <!-- insert css -->
 
 <!-- section class start here  -->
 <div class="container-fluid p-0"><!-- 1  -->
@@ -15,30 +14,36 @@
                 <form method="post" action="{{ route('storePayment') }}" enctype="multipart/form-data" id="paymentForm">
                     @csrf <!-- CSRF Token -->
 
-                    <p>
                     <!-- Date Input -->
-                    <div class="mb-3">
-                        <label for="datetime" class="form-label">DATE          :</label>
-                        <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
+                    <div class="row mb-3">
+                        <label for="datetime" class="col-sm-3 col-form-label">DATE:</label>
+                        <div class="col-sm-9">
+                            <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
+                        </div>
                     </div>
 
                     <!-- Payment Detail Input -->
-                    <div class="mb-3">
-                        <label for="payment_detail" class="form-label">PAYMENT DETAIL</label>
-                        <textarea class="form-control" id="payment_detail" name="payment_detail" rows="3" required></textarea>
+                    <div class="row mb-3">
+                        <label for="payment_detail" class="col-sm-3 col-form-label">PAYMENT DETAIL:</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="payment_detail" name="payment_detail" rows="3" required></textarea>
+                        </div>
                     </div>
 
                     <!-- File Input for Receipt for the input-->
-                    <div class="mb-3">
-                        <label for="receipt" class="form-label">PLEASE UPLOAD YOUR TRANSFER RECEIPT</label><br>
-                        <label for="payment_proof" class="form-label">Payment Proof (PDF, PNG, JPG)</label>
-                        <input type="file" class="form-control" id="payment_proof" name="payment_proof" accept=".pdf, .png, .jpg" required>
+                    <div class="row mb-3">
+                        <label for="receipt" class="col-sm-3 col-form-label">UPLOAD RECEIPT:</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" id="payment_proof" name="payment_proof" accept=".pdf, .png, .jpg" required>
+                        </div>
                     </div>
 
                     <!-- QR Code Image -->
-                    <div class="mb-3">
-                        <label for="qr_payment" class="form-label">QR Payment</label>
-                        <img src="{{ asset('app/public/assets/QR.png.jpg') }}" alt="QR Code" class="img-fluid">
+                    <div class="row mb-3">
+                        <label for="qr_payment" class="col-sm-3 col-form-label">QR Payment:</label>
+                        <div class="col-sm-9">
+                            <img src="{{ asset('app/public/assets/QR.png.jpg') }}" alt="QR Code" class="img-fluid">
+                        </div>
                     </div>
 
                     <!-- Action Buttons -->

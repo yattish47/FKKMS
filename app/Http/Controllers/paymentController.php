@@ -58,6 +58,7 @@ class paymentController extends Controller
      */
     public function viewPayment($paymentID)
     {
+        \Log::info("Reached viewPayment method with paymentID: $paymentID");
         $paymentRecord = paymentRecord::where('paymentID', $paymentID)->first();
         return view('ManagePayment.KioskParticipant.viewPayment', ['paymentRecord' => $paymentRecord]);
     }

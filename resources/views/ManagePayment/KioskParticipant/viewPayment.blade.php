@@ -77,12 +77,13 @@
             var result = confirm('DELETED');
             if (result) {
                 // If 'RETURN' button is clicked
-                window.location.href = '{{ route('viewPayment') }}'; // Redirect to the list of payments
+                window.location.href = '{{ route('viewPayment', ['paymentID' => $paymentRecord->paymentID]) }}';
+ // Redirect to the list of payments
             }
         } else {
             // If 'NO' button is clicked or the user cancels the confirmation
             // Redirect to the list of payments
-            window.location.href = '{{ route('viewPayment') }}';
+            window.location.href = '{{ route('viewPayment', ['paymentID' => $paymentRecord->paymentID]) }}';
         }
     }
 </script>
