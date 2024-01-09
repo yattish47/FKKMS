@@ -15,7 +15,7 @@ class paymentRecord extends Model
         'payDetail',
         'payProof',
         'payQR',
-        'payInovoice',
+        'payInvoice',
         'payStatus'
     ];
 }

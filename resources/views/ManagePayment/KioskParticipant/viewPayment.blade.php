@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-<link rel="stylesheet" href="{{ }}"> <!-- insert css -->
+<link rel="stylesheet" href="{{ asset('css/ManageKiosk/listofkioskapplication.css') }}"> <!-- insert css -->
 
 <!-- section class start here  -->
 <div class="container-fluid p-0"><!-- 1  -->
@@ -22,42 +22,42 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($payments as $index => $payment)
-                            <tr>
-                                <td>
-                                    <div class="ms-3">
-                                        <p class="fw-bold mb-1">{{ $index + 1 }}</p>
-                                    </div>
-                                </td>
+                        @foreach ($payments as $index => $paymentRecord)
+                    <tr>
+                        <td>
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">{{ $index + 1 }}</p>
+                            </div>
+                        </td>
 
-                                <td>
-                                    <p class="fw-normal mb-1">{{ $payment->paymentID}}</p> 
-                                </td>
-                                <td>
-                                    <p class="fw-normal mb-1">{{ $payment->payDate}}</p> 
-                                </td>
-                                <td>
-                                    <p class="fw-normal mb-1">{{ $payment->paymentStatus}}</p> 
-                                </td>
-                                <td>
-                                    <div class="btn-group shadow-0" role="group" style="margin-left: -20px">
-                                        <button type="button" class="btn btn-link" data-mdb-color="dark"
-                                            onclick="window.location='{{ route('updatePayment', ['id' => $payment->paymentID]) }}'">
-                                            <i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i>
-                                        </button>
-                                        {{-- Edit button (commented out)
-                                        <button type="button" class="btn btn-link" data-mdb-color="dark">
-                                            <i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i>
-                                        </button>
-                                        --}}
-                                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="confirmDelete({{ $payment->paymentID }})">
-                                            <i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i>
-                                        </button>
-                                    </div>
-                                </td>
+                         <td>
+                            <p class="fw-normal mb-1">{{ $paymentRecord->paymentID}}</p> 
+                        </td>
+                         <td>
+                            <p class="fw-normal mb-1">{{ $paymentRecord->payDate}}</p> 
+                        </td>
+                         <td>
+                            <p class="fw-normal mb-1">{{ $paymentRecord->paymentStatus}}</p> 
+                         </td>
+                        <td>
+                            <div class="btn-group shadow-0" role="group" style="margin-left: -20px">
+                                <button type="button" class="btn btn-link" data-mdb-color="dark"
+                                onclick="window.location='{{ route('updatePayment', ['id' => $paymentRecord->paymentID]) }}'">
+                                    <i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i>
+                                </button>
+                                {{-- Edit button (commented out)
+                                <button type="button" class="btn btn-link" data-mdb-color="dark">
+                                    <i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i>
+                                </button>
+                                --}}
+                                <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="confirmDelete({{ $paymentRecord->paymentID }})">
+                                    <i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
 
-                            </tr>
-                        @endforeach
                     </tbody>
                 </table>
 

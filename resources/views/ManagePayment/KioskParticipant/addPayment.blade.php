@@ -1,7 +1,8 @@
 @extends('layouts.master')
 @section('content')
 
-<link rel="stylesheet" href="{{ }}"> <!-- insert css -->
+<link rel="stylesheet" href="{{ asset('css/ManageKiosk/listofkioskapplication.css') }}"> <!-- insert css -->
+
 
 <!-- section class start here  -->
 <div class="container-fluid p-0"><!-- 1  -->

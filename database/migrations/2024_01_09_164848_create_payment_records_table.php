@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payment_record', function (Blueprint $table) {
-            $table->bigIncrements('paymentID')->primary;
-            $table->string('kioskID',10);
-            $table->foreign('kioskID')->references('kisokID')->on('kiosks')->onDelete('cascade');//foreing key from kiosk table
-            $table->dateTime('payDate',$precision = 0);
+            $table->bigIncrements('paymentID'); // Assuming 'paymentID' is your primary key
+            $table->string('kioskID', 10);
+            $table->foreign('kioskID')->references('kioskID')->on('kiosks')->onDelete('cascade');
+            $table->dateTime('payDate', $precision = 0);
             $table->string('payDetail', 100);
             $table->binary('payProof');
-            $table->binary('payQR');
-            $table->binary('payInovice');
+            $table->binary('payInvoice');
             $table->string('payStatus', 20);
             $table->timestamps(); // Created_at and updated_at columns
+            $table->unique('paymentID'); // Ensure uniqueness on paymentID
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paymentRecord');
+        Schema::dropIfExists('paymentRecords');
     }
 };
