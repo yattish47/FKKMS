@@ -8,13 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class paymentRecord extends Model
 {
     use HasFactory;
-    protected $table = 'paymentRecord';
+    protected $table = 'paymentrecords';
     protected $primaryKey = 'paymentID';
+
     protected $fillable = [
+        'kioskID',
         'payDate',
         'payDetail',
         'payProof',
         'payInvoice',
         'payStatus'
     ];
+
+    public function kiosks()
+    {
+        return $this->belongsTo(kiosks::class, 'kioskID');
+    }
+
 }

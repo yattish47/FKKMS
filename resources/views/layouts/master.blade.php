@@ -58,7 +58,7 @@
                         <a class="nav-link" href="#"><i class="bi bi-pen-fill  me-2"></i>COMPLAINTS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-credit-card-fill  me-2"></i>PAYMENT</a>
+                        <a class="nav-link" href="{{ route('viewPayment')}}"><i class="bi bi-credit-card-fill  me-2"></i>PAYMENT</a>
                     </li>
                 </ul>
                 <!-- Left links -->

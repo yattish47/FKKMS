@@ -22,7 +22,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($payments as $index => $paymentRecord)
+                        @foreach ($paymentRecords as $index)
                     <tr>
                         <td>
                             <div class="ms-3">
@@ -31,18 +31,18 @@
                         </td>
 
                          <td>
-                            <p class="fw-normal mb-1">{{ $paymentRecord->paymentID}}</p> 
+                            <p class="fw-normal mb-1">{{ $paymentRecords->paymentID}}</p> 
                         </td>
                          <td>
-                            <p class="fw-normal mb-1">{{ $paymentRecord->payDate}}</p> 
+                            <p class="fw-normal mb-1">{{ $paymentRecords->payDate}}</p> 
                         </td>
                          <td>
-                            <p class="fw-normal mb-1">{{ $paymentRecord->paymentStatus}}</p> 
+                            <p class="fw-normal mb-1">{{ $paymentRecords->paymentStatus}}</p> 
                          </td>
                         <td>
                             <div class="btn-group shadow-0" role="group" style="margin-left: -20px">
                                 <button type="button" class="btn btn-link" data-mdb-color="dark"
-                                onclick="window.location='{{ route('updatePayment', ['id' => $paymentRecord->paymentID]) }}'">
+                                onclick="window.location='{{ route('updatePayment', ['id' => $paymentRecords->paymentID]) }}'">
                                     <i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i>
                                 </button>
                                 {{-- Edit button (commented out)
@@ -50,7 +50,7 @@
                                     <i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i>
                                 </button>
                                 --}}
-                                <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="confirmDelete({{ $paymentRecord->paymentID }})">
+                                <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="confirmDelete({{ $paymentRecords->paymentID }})">
                                     <i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i>
                                 </button>
                             </div>
@@ -62,7 +62,7 @@
                 </table>
 
                 <!-- New Payment Button -->
-                <button type="button" class="btn btn-light btn-new-payment mt-3" onclick="window.location='{{ route('addPayment') }}'">
+                <button type="button" class="btn btn-light btn-new-payment mt-3" onclick="window.location='{{ route('newPayment') }}'">
                     NEW PAYMENT
                 </button>
             </div><!-- 4  -->
@@ -74,16 +74,11 @@
     function confirmDelete(paymentID) {
         if (confirm('Delete the details?')) {
             // If 'YES' button is clicked
-            var result = confirm('DELETED');
-            if (result) {
-                // If 'RETURN' button is clicked
-                window.location.href = '{{ route('viewPayment', ['paymentID' => $paymentRecord->paymentID]) }}';
- // Redirect to the list of payments
-            }
+            window.location.href = '/ManagePayment/KioskParticipant/viewPayment';
         } else {
             // If 'NO' button is clicked or the user cancels the confirmation
             // Redirect to the list of payments
-            window.location.href = '{{ route('viewPayment', ['paymentID' => $paymentRecord->paymentID]) }}';
+            window.location.href = '{{ route('viewPayment') }}';
         }
     }
 </script>
