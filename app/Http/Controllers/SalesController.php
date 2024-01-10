@@ -140,4 +140,21 @@ public function filterPAdmin(Request $request)
         return view('ManageReport.PUPUKAdmin.PAdminViewSales', compact('reports'));
     }
 
+    public function filterAdmin(Request $request)
+    {
+        $query = SalesRecord::query();
+
+        if ($request->filled('year')) {
+            $query->where('year', $request->input('year'));
+        }
+
+        if ($request->filled('month')) {
+            $query->where('month', $request->input('month'));
+        }
+
+        $reports = $query->get();
+
+        return view('ManageReport.Admin.AdminViewSales', compact('reports'));
+    }
+
 }

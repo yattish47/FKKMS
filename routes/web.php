@@ -100,7 +100,10 @@ Route::put('/ManageReport/KioskParticipant/{ReportID}/update', [SalesController:
 Route::get('/ManageReport/KioskParticipant/{ReportID}/delete', [SalesController::class, 'destroy']);
 
 Route::get('/ManageReport/PUPUKAdmin/PAdminViewSales', [SalesController::class, 'PadminView'])->name('PadminViewSales');
+Route::get('/ManageReport/Admin/AdminViewSales', [SalesController::class, 'AdminView'])->name('AdminViewSales');
 
 Route::get('/reports-filterPAdmin', [SalesController::class, 'filterPAdmin'])->name('reports.filterPAdmin');
+Route::get('/reports-filterAdmin', [SalesController::class, 'filterAdmin'])->name('reports.filterAdmin');
+
 
 
