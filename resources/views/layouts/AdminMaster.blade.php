@@ -103,8 +103,8 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
       
     <!-- Copyright -->
     <div
-      class="text-center text-white p-3"
-      style="background-color: rgba(44, 88, 100, 1)"
+      class="text-center text-black p-3"
+      style="background-color: #F9F3CC"
     >
     © 2024 FKKMS
     </div>

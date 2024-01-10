@@ -41,7 +41,7 @@ class AccountController extends Controller
                     if ($this->manualCheck('admin')) {
                         //  $user = $this->manualUser();
 
-                       // return redirect()->route('pupukViewListOfApplication');
+                       return redirect()->route('AdminViewSales');
                     } else {
 
                         return redirect()->back()->withErrors(['Invalid credentials']);
