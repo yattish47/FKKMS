@@ -14,7 +14,6 @@ class paymentRecord extends Model
         'payDate',
         'payDetail',
         'payProof',
-        'payQR',
         'payInvoice',
         'payStatus'
     ];

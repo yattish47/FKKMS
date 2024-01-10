@@ -56,12 +56,20 @@ class paymentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function viewPayment($paymentID)
+    public function viewPayment(Request $request)
     {
-        \Log::info("Reached viewPayment method with paymentID: $paymentID");
-        $paymentRecord = paymentRecord::where('paymentID', $paymentID)->first();
-        return view('ManagePayment.KioskParticipant.viewPayment', ['paymentRecord' => $paymentRecord]);
+        // Assuming you want to fetch the latest payment record
+        $paymentRecord = paymentrecords::latest()->first();
+        
+        if (!$paymentRecord) {
+            // Handle the case when the payment record is not found
+            abort(404);
+        }
+    
+        return view('ManagePayment.KioskParticipant.viewPayment', ['paymentrecords' => $paymentRecord]);
     }
+    
+    
 
     /**
      * Show the form for editing the specified resource.

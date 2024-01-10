@@ -78,7 +78,7 @@ Route::get('/pupuk/delete-application/{id}', [KioskController::class, 'deleteApp
 //payment part
 // Route::get('/ManagePayment/KioskParticipant/viewPayment', [PaymentController::class, 'viewPayment'])->name('viewPayment');
 
-Route::get('/ManagePayment/KioskParticipant/viewPayment/{paymentID}', [paymentController::class, 'viewPayment'])->name('viewPayment');
+Route::get('/ManagePayment/KioskParticipant/viewPayment', [paymentController::class, 'viewPayment'])->name('viewPayment');
 
 Route::get('/ManagePayment/KioskParticipant/addPayment', [paymentController::class, 'showPaymentForm'])->name('newPayment');
 
