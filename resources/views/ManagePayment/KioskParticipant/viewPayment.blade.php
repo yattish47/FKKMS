@@ -3,8 +3,27 @@
 
 <link rel="stylesheet" href="{{ asset('css/ManageKiosk/listofkioskapplication.css') }}"> <!-- insert css -->
 
+<style>
+        .btn-new-payment {
+            display: block;
+            margin-top: 40px; /* Adjust the margin as needed */
+            background-color: #DDD5F3;
+            color: #000;
+            font-size: 12px;
+            border: 2px solid #000;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+    .btn-new-payment:hover {
+        background-color: #ADD8E6; /* Light blue color */
+        color: #000;
+    }
+</style>
+
 <!-- section class start here  -->
-<div class="container-fluid p-0"><!-- 1  -->
+<div class="container-fluid p-4"><!-- 1  -->
     <div class="card h-100 text-center"><!-- 2  -->
         <div class="card-body"><!-- 3  -->
             <h3 class="card-title fw-bold text-center">Rental Payment List</h3> 
@@ -37,7 +56,7 @@
                             <p class="fw-normal mb-1">{{ $paymentRecords->payDate}}</p> 
                         </td>
                          <td>
-                            <p class="fw-normal mb-1">{{ $paymentRecords->paymentStatus}}</p> 
+                            <p class="fw-normal mb-1">{{ $paymentRecords->payStatus}}</p> 
                          </td>
                         <td>
                             <div class="btn-group shadow-0" role="group" style="margin-left: -20px">
@@ -61,11 +80,14 @@
                     </tbody>
                 </table>
 
+            </div><!-- 4  -->
+                <br><br>
+        
                 <!-- New Payment Button -->
-                <button type="button" class="btn btn-light btn-new-payment mt-3" onclick="window.location='{{ route('newPayment') }}'">
+                <button type="button" class="btn btn-light btn-new-payment position-absolute bottom-0 end-0 m-4" onclick="window.location='{{ route('newPayment') }}'">
                     NEW PAYMENT
                 </button>
-            </div><!-- 4  -->
+
         </div><!-- 3  -->
     </div><!-- 2  -->
 </div> <!-- 1  -->

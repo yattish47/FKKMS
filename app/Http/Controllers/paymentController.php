@@ -56,30 +56,27 @@ class paymentController extends Controller
         // Validate the form data
         $validatedData = $request->validate([
             'paymentID' => 'required',
-            'payDate'=> 'required|dateTime',
+            'payDate'=> 'required',
             'payDetail' => 'required',
             'payProof' => 'required',
-            'payInvoice'=> null,
-            'payStatus'=> null,
-            // Add any additional validation rules as needed
+            'payInvoice'=> 'required',
+            'payStatus'=> 'required',
         ]);
 
         //get foreign key from kiosk table
         $kioskID = auth()->kiosks->id;
 
         // Handle file uploads
-        $payment_proof = $request->file('payment_proof');
-        $proofPath = $payment_proof->storeAs('proofs', $request->input('paymentID').'.'.$payment_proof->extension(), 'public');
+        $payProof = $request->file('payProof');
+        $proofPath = $payProof->storeAs('proofs', $request->input('paymentID').'.'.$payProof->extension(), 'public');
 
         // Save the payment data to the database
         $payment = new paymentRecord([
-            'kioskID' => $kioskID,
             'paymentID' => $request->input('paymentID'),
-            'kioskID'=> $request->input('paymentID'),
-            'payDate' => $request->input('dateTime'),
-            'payDetail' => $validatedData['payment_detail'],
-            'payProof' => $proofPath,
-            // Add any additional fields as needed
+            'kioskID' => $kioskID,
+            'payDate' => $request->input('payDate'),
+            'payDetail' => $validatedData['payDetail'],
+            'payProof' => $proofPath
         ]);
 
         $payment->save();

@@ -16,31 +16,31 @@
 
                     <!-- Date Input -->
                     <div class="row mb-3">
-                        <label for="datetime" class="col-sm-3 col-form-label">DATE:</label>
+                        <label for="payDate" class="col-sm-3 col-form-label">DATE:</label>
                         <div class="col-sm-9">
-                            <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
+                            <input type="datetime-local" class="form-control" id="payDate" name="payDate" required>
                         </div>
                     </div>
 
                     <!-- Payment Detail Input -->
                     <div class="row mb-3">
-                        <label for="payment_detail" class="col-sm-3 col-form-label">PAYMENT DETAIL:</label>
+                        <label for="payDetail" class="col-sm-3 col-form-label">PAYMENT DETAIL:</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control" id="payment_detail" name="payment_detail" rows="3" required></textarea>
+                            <textarea class="form-control" id="payDetail" name="payDetail" rows="3" required></textarea>
                         </div>
                     </div>
 
                     <!-- File Input for Receipt for the input-->
                     <div class="row mb-3">
-                        <label for="receipt" class="col-sm-3 col-form-label">UPLOAD RECEIPT:</label>
+                        <label for="payProof" class="col-sm-3 col-form-label">UPLOAD RECEIPT:</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" id="payment_proof" name="payment_proof" accept=".pdf, .png, .jpg" required>
+                            <input type="file" class="form-control" id="payProof" name="payProof" accept=".pdf, .png, .jpg" required>
                         </div>
                     </div>
 
                     <!-- QR Code Image -->
                     <div class="row mb-3">
-                        <label for="qr_payment" class="col-sm-3 col-form-label">QR Payment:</label>
+                        <label for="payQR" class="col-sm-3 col-form-label">QR Payment:</label>
                         <div class="col-sm-9">
                             <img src="{{ asset('app/public/assets/QR.png.jpg') }}" alt="QR Code" class="img-fluid">
                         </div>
