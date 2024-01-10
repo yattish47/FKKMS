@@ -123,6 +123,13 @@ class SalesController extends Controller
     return view('ManageReport/PUPUKAdmin/PAdminViewSales', compact('reports'));
 }
 
+public function AdminView()
+{
+    $reports = SalesRecord::all(); // Fetch all reports (modify as needed)
+
+    return view('ManageReport/Admin/AdminViewSales', compact('reports'));
+}
+
 public function filterPAdmin(Request $request)
     {
         $query = SalesRecord::query();

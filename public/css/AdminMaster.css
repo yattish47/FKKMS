@@ -110,7 +110,7 @@ body{
 }
 .sidebar input{
   font-size: 15px;
-  color: #FFF;
+  color: #000;
   font-weight: 400;
   outline: none;
   height: 50px;
@@ -181,7 +181,7 @@ body{
  
 }
 .sidebar .active i{
-  color: #ffffff;
+  color: #000000;
   
 }
 .sidebar .profile-section li a{
@@ -195,10 +195,10 @@ color: #F9F3CC!important;
   color: #F9F3CC!important;
 }
 .sidebar .profile-section li a:hover span{
-  color: #ffffff!important;
+  color: #000000!important;
 }
 .sidebar .profile-section li a:hover .fa-solid{
-  color: #ffffff!important;
+  color: #000000!important;
 }
 .sidebar.open li a .links_name{
   opacity: 1;

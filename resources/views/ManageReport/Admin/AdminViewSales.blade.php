@@ -38,8 +38,8 @@
     }
 
     .btn-primary {
-        background-color: #2C5864;
-        color: #fff;
+        background-color: #F9F3CC;
+        color: #000;
     }
 </style>
 
