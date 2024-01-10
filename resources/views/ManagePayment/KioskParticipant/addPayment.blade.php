@@ -11,7 +11,7 @@
             <div class="d-flex justify-content-center "> <!-- 4  -->
 
                 <!-- Payment Details Form -->
-                <form method="post" action="{{ route('storePayment') }}" enctype="multipart/form-data" id="paymentForm">
+                <form method="post" action="{{ route('storePayment') }}" enctype="multipart/form-data" id="paymentrecords">
                     @csrf <!-- CSRF Token -->
 
                     <!-- Date Input -->
@@ -49,7 +49,7 @@
                     <!-- Action Buttons -->
                     <div class="d-flex justify-content-center">
                         <!-- Cancel Button -->
-                        <button type="button" class="btn btn-secondary me-3" onclick="window.location='{{ route('viewPayment', ['paymentID' => $paymentID]) }}'">CANCEL</button>
+                        <button type="button" class="btn btn-secondary me-3" onclick="window.location='{{ route('viewPayment')}}'">CANCEL</button>
 
                         <!-- Submit Button with Confirmation -->
                         <button type="button" class="btn btn-primary" onclick="showConfirmation()">SUBMIT</button>
@@ -69,13 +69,13 @@
             submitForm();
         } else {
             // If 'NO' button is clicked
-            // You can add any additional action or leave it as is
         }
     }
 
     function submitForm() {
         // Submit the form
-        document.getElementById('paymentForm').submit();
+        document.getElementById('paymentrecords').submit();
+        window.location.href = '{{ route('viewPayment') }}';
     }
 </script>
 

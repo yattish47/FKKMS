@@ -32,8 +32,7 @@
                 <table class="table align-middle mb-0 bg-white mt-5 table-responsive-sm table-hover">
                     <thead>
                         <tr>
-                            <th class="firstcol">No</th>
-                            <th>PAYMENT ID</th>
+                            <th class="firstcol">PAYMENT ID</th>
                             <th>DATE</th>
                             <th>PAYMENT STATUS</th>
                             <th class="lastcol">ACTION</th>
@@ -41,27 +40,22 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($paymentRecords as $index)
+                        @foreach ($paymentrecords as $paymentrecords)
                     <tr>
-                        <td>
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1">{{ $index + 1 }}</p>
-                            </div>
-                        </td>
-
+ 
                          <td>
-                            <p class="fw-normal mb-1">{{ $paymentRecords->paymentID}}</p> 
+                            <p class="fw-normal mb-1">{{ $paymentrecords->paymentID}}</p> 
                         </td>
                          <td>
-                            <p class="fw-normal mb-1">{{ $paymentRecords->payDate}}</p> 
+                            <p class="fw-normal mb-1">{{ $paymentrecords->payDate}}</p> 
                         </td>
                          <td>
-                            <p class="fw-normal mb-1">{{ $paymentRecords->payStatus}}</p> 
+                            <p class="fw-normal mb-1">{{ $paymentrecords->payStatus}}</p> 
                          </td>
                         <td>
                             <div class="btn-group shadow-0" role="group" style="margin-left: -20px">
                                 <button type="button" class="btn btn-link" data-mdb-color="dark"
-                                onclick="window.location='{{ route('updatePayment', ['id' => $paymentRecords->paymentID]) }}'">
+                                onclick="window.location='{{ route('updatePayment', ['id' => $paymentrecords->paymentID]) }}'">
                                     <i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i>
                                 </button>
                                 {{-- Edit button (commented out)
@@ -69,7 +63,7 @@
                                     <i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i>
                                 </button>
                                 --}}
-                                <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="confirmDelete({{ $paymentRecords->paymentID }})">
+                                <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="confirmDelete({{ $paymentrecords->paymentID }})">
                                     <i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i>
                                 </button>
                             </div>

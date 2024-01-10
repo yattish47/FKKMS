@@ -84,6 +84,8 @@ Route::get('/ManagePayment/KioskParticipant/addPayment', [paymentController::cla
 
 Route::post('/ManagePayment/KioskParticipant/viewPayment', [paymentController::class, 'storePayment'])->name('storePayment');
 
+Route::get('/ManagePayment/KioskParticipant/updatePayment', [paymentController::class, 'updatePayment'])->name('updatePayment');
+
 
 Route::get('/ManageReport/KioskParticipant/KPViewSales', [SalesController::class, 'index'])->name('reports');
 

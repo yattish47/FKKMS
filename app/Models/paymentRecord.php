@@ -10,6 +10,7 @@ class paymentRecord extends Model
     use HasFactory;
     protected $table = 'paymentrecords';
     protected $primaryKey = 'paymentID';
+    public $incrementing = true;
 
     protected $fillable = [
         'kioskID',

@@ -15,15 +15,9 @@ class paymentController extends Controller
     public function viewPayment()
     {
         // fetch data from database
-        $paymentRecords = paymentRecord::all();
-        return view ('ManagePayment.KioskParticipant.viewPayment',compact('paymentRecords'));
+        $paymentrecords = paymentRecord::all();
+        return view ('ManagePayment.KioskParticipant.viewPayment',compact('paymentrecords'));
 
-        // if (!$paymentRecord) {
-        //     // Handle the case when the payment record is not found
-        //     abort(404);
-        // }
-    
-        // return view('ManagePayment.KioskParticipant.viewPayment', ['paymentrecords' => $paymentRecord]);
     } 
     
     /**
@@ -39,19 +33,74 @@ class paymentController extends Controller
      */
     public function showPaymentForm()
     {
-        // Assuming you're creating a new payment, you might not have a paymentID yet
-        // If you need to generate a unique paymentID, you can use something like UUID
-        $paymentID = Uuid::uuid4()->toString();
+        // $paymentID = Uuid::uuid4()->toString();
     
-        // Pass the paymentID to the view
-        return view('ManagePayment.KioskParticipant.addPayment', ['paymentID' => $paymentID]);
+        // // Pass the paymentID to the view
+        // return view('ManagePayment.KioskParticipant.addPayment', ['paymentID' => $paymentID]);
+
+        return view('ManagePayment.KioskParticipant.addPayment');
     }
     
+    public function storePayment(Request $request)
+    {
+        $paymentrecords = new paymentRecord;
+        $paymentrecords->payDate = $request -> payDate;
+        $paymentrecords->payDetail = $request -> payDetail;
+        $paymentrecords->payProof = $request -> payProof;
+        $paymentrecords->payInvoice = $request -> payInvoice;
+        $paymentrecords->payStatus = $request -> payStatus;
+
+        $paymentrecords->save();
+        return redirect()->intended('viewPayment');
+
+    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function storePayment(Request $request)
+    // public function storePayment(Request $request)
+    // {
+    //     // Validate the form data
+    //     $validatedData = $request->validate([
+    //         'payDate'=> 'required',
+    //         'payDetail' => 'required',
+    //         'payProof' => 'required',
+    //         'payInvoice'=> 'nullable',
+    //         'payStatus'=> 'nullable',
+    //     ]);
+
+    //     //get foreign key from kiosk table
+    //     $kioskID = auth()->kiosks->id;
+
+    //    // Check if a file is uploaded
+    //     if ($request->hasFile('payProof') && $payProof->isValid()) {
+    //     // Handle the file upload
+    //         $proofPath = $payProof->storeAs('payProof', $request->input('paymentID').'.'.$payProof->extension(), 'public');
+    //     } else {
+    //     // Handle the case where no valid file is uploaded
+    //             }
+
+    //     // Save the payment data to the database
+    //     $paymentrecord = new paymentRecord([
+    //         'kioskID' => $kioskID,
+    //         'payDate' => $request->input('payDate'),
+    //         'payDetail' => $validatedData['payDetail'],
+    //         'payProof' => $proofPath,
+    //         'payInvoice' => $request->input('payInvoice'),
+    //         'payStatus' => $request->input('payStatus'),
+    //     ]);
+
+    //     $paymentrecord->save();
+
+    //     // You can redirect to the payment details page or any other page after successful submission
+    //     return redirect()->route('viewPayment')->with('success', 'Payment details successfully submitted!');
+    // }
+    
+
+        // /**
+    //  * Update the specified resource in storage.
+    //  */
+    public function updatePayment(Request $request)
     {
         // Validate the form data
         $validatedData = $request->validate([
@@ -59,8 +108,8 @@ class paymentController extends Controller
             'payDate'=> 'required',
             'payDetail' => 'required',
             'payProof' => 'required',
-            'payInvoice'=> 'required',
-            'payStatus'=> 'required',
+            'payInvoice'=> 'nullable',
+            'payStatus'=> 'nullable',
         ]);
 
         //get foreign key from kiosk table
@@ -68,23 +117,24 @@ class paymentController extends Controller
 
         // Handle file uploads
         $payProof = $request->file('payProof');
-        $proofPath = $payProof->storeAs('proofs', $request->input('paymentID').'.'.$payProof->extension(), 'public');
+        $proofPath = $payProof->storeAs('payProof', $request->input('paymentID').'.'.$payProof->extension(), 'public');
 
         // Save the payment data to the database
-        $payment = new paymentRecord([
-            'paymentID' => $request->input('paymentID'),
+        $paymentrecords = new paymentrecords([
+            // 'paymentID' => $request->input('paymentID'),
             'kioskID' => $kioskID,
             'payDate' => $request->input('payDate'),
             'payDetail' => $validatedData['payDetail'],
-            'payProof' => $proofPath
+            'payProof' => $proofPath,
+            'payInvoice' => $request->input('payInvoice'),
+            'payStatus' => $request->input('payStatus'),
         ]);
 
-        $payment->save();
-
-        // You can redirect to the payment details page or any other page after successful submission
-        return redirect()->route('viewPayment')->with('success', 'Payment details successfully submitted!');
+        $paymentrecords->save();
+        // Redirect to the payment details page or any other page after successful update
+        return redirect()->route('viewPayment')->with('success', 'Payment details successfully updated!');
     }
-    
+
 
     // public function viewPayments(){
     //     $paymentRecord = viewPayments::all();
@@ -101,13 +151,6 @@ class paymentController extends Controller
     //     //
     // }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, string $id)
-    // {
-        
-    // }
 
     // /**
     //  * Remove the specified resource from storage.
