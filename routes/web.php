@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\KioskController;
+use App\Http\Controllers\paymentController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ComplaintController;
 
@@ -75,8 +76,21 @@ Route::get('/pupuk/view-application/{id}/{from}', [KioskController::class, 'view
 
 Route::get('/pupuk/delete-application/{id}', [KioskController::class, 'deleteApplicationForPupuk'])->name('pupukDeleteApplication');
 
+//payment part
+// Route::get('/ManagePayment/KioskParticipant/viewPayment', [PaymentController::class, 'viewPayment'])->name('viewPayment');
+
+Route::get('/ManagePayment/KioskParticipant/viewPayment', [paymentController::class, 'viewPayment'])->name('viewPayment');
+
+Route::get('/ManagePayment/KioskParticipant/newPayment', [paymentController::class, 'showPaymentForm'])->name('newPayment');
+
+Route::post('/ManagePayment/KioskParticipant/storePayment', [paymentController::class, 'storePayment'])->name('storePayment');
+
+Route::get('/ManagePayment/KioskParticipant/updatePayment', [paymentController::class, 'updatePayment'])->name('updatePayment');
+
+Route::delete('/delete-payment/{paymentID}', [PaymentController::class, 'deletePayment'])->name('deletePayment');
 
 
+//route untuk managereport
 Route::get('/ManageReport/KioskParticipant/KPViewSales', [SalesController::class, 'index'])->name('reports');
 
 Route::post('/ManageReport/KioskParticipant/addSales', [SalesController::class, 'store'])->name('reports.store');
@@ -92,8 +106,10 @@ Route::put('/ManageReport/KioskParticipant/{ReportID}/update', [SalesController:
 Route::get('/ManageReport/KioskParticipant/{ReportID}/delete', [SalesController::class, 'destroy']);
 
 Route::get('/ManageReport/PUPUKAdmin/PAdminViewSales', [SalesController::class, 'PadminView'])->name('PadminViewSales');
+Route::get('/ManageReport/Admin/AdminViewSales', [SalesController::class, 'AdminView'])->name('AdminViewSales');
 
 Route::get('/reports-filterPAdmin', [SalesController::class, 'filterPAdmin'])->name('reports.filterPAdmin');
+
 
 
 

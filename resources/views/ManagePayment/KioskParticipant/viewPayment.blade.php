@@ -1,10 +1,30 @@
 @extends('layouts.master')
 @section('content')
 
-<link rel="stylesheet" href="{{ }}"> <!-- insert css -->
+<link rel="stylesheet" href="{{ asset('css/ManageKiosk/listofkioskapplication.css') }}"> <!-- insert css -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<style>
+        .btn-new-payment {
+            display: block;
+            margin-top: 40px; /* Adjust the margin as needed */
+            background-color: #DDD5F3;
+            color: #000;
+            font-size: 12px;
+            border: 2px solid #000;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+    .btn-new-payment:hover {
+        background-color: #ADD8E6; /* Light blue color */
+        color: #000;
+    }
+</style>
 
 <!-- section class start here  -->
-<div class="container-fluid p-0"><!-- 1  -->
+<div class="container-fluid p-4"><!-- 1  -->
     <div class="card h-100 text-center"><!-- 2  -->
         <div class="card-body"><!-- 3  -->
             <h3 class="card-title fw-bold text-center">Rental Payment List</h3> 
@@ -13,8 +33,7 @@
                 <table class="table align-middle mb-0 bg-white mt-5 table-responsive-sm table-hover">
                     <thead>
                         <tr>
-                            <th class="firstcol">No</th>
-                            <th>PAYMENT ID</th>
+                            <th class="firstcol">PAYMENT ID</th>
                             <th>DATE</th>
                             <th>PAYMENT STATUS</th>
                             <th class="lastcol">ACTION</th>
@@ -22,50 +41,48 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($payments as $index => $payment)
-                            <tr>
-                                <td>
-                                    <div class="ms-3">
-                                        <p class="fw-bold mb-1">{{ $index + 1 }}</p>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <p class="fw-normal mb-1">{{ $payment->paymentID}}</p> 
-                                </td>
-                                <td>
-                                    <p class="fw-normal mb-1">{{ $payment->payDate}}</p> 
-                                </td>
-                                <td>
-                                    <p class="fw-normal mb-1">{{ $payment->paymentStatus}}</p> 
-                                </td>
-                                <td>
-                                    <div class="btn-group shadow-0" role="group" style="margin-left: -20px">
-                                        <button type="button" class="btn btn-link" data-mdb-color="dark"
-                                            onclick="window.location='{{ route('updatePayment', ['id' => $payment->paymentID]) }}'">
-                                            <i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i>
-                                        </button>
-                                        {{-- Edit button (commented out)
-                                        <button type="button" class="btn btn-link" data-mdb-color="dark">
-                                            <i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i>
-                                        </button>
-                                        --}}
-                                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="confirmDelete({{ $payment->paymentID }})">
-                                            <i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i>
-                                        </button>
-                                    </div>
-                                </td>
-
-                            </tr>
+                        @foreach ($paymentrecords as $paymentrecords)
+                    <tr>
+ 
+                         <td>
+                            <p class="fw-normal mb-1">{{ $paymentrecords->paymentID}}</p> 
+                        </td>
+                         <td>
+                            <p class="fw-normal mb-1">{{ $paymentrecords->payDate}}</p> 
+                        </td>
+                         <td>
+                            <p class="fw-normal mb-1">{{ $paymentrecords->payStatus}}</p> 
+                         </td>
+                        <td>
+                            <div class="btn-group shadow-0" role="group" style="margin-left: -20px">
+                                <button type="button" class="btn btn-link" data-mdb-color="dark"
+                                onclick="window.location='{{ route('updatePayment', ['id' => $paymentrecords->paymentID]) }}'">
+                                    <i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i>
+                                </button>
+                                {{-- Edit button (commented out)
+                                <button type="button" class="btn btn-link" data-mdb-color="dark">
+                                    <i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i>
+                                </button>
+                                --}}
+                                <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="confirmDelete({{ $paymentrecords->paymentID }})">
+                                    <i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
                         @endforeach
+
                     </tbody>
                 </table>
 
+            </div><!-- 4  -->
+                <br><br>
+        
                 <!-- New Payment Button -->
-                <button type="button" class="btn btn-light btn-new-payment mt-3" onclick="window.location='{{ route('addPayment') }}'">
+                <button type="button" class="btn btn-light btn-new-payment position-absolute bottom-0 end-0 m-4" onclick="window.location='{{ route('newPayment') }}'">
                     NEW PAYMENT
                 </button>
-            </div><!-- 4  -->
+
         </div><!-- 3  -->
     </div><!-- 2  -->
 </div> <!-- 1  -->
@@ -74,15 +91,19 @@
     function confirmDelete(paymentID) {
         if (confirm('Delete the details?')) {
             // If 'YES' button is clicked
-            var result = confirm('DELETED');
-            if (result) {
-                // If 'RETURN' button is clicked
-                window.location.href = '{{ route('viewPayment') }}'; // Redirect to the list of payments
-            }
+
+            axios.delete('{{ route("deletePayment", ":paymentID") }}'.replace(':paymentID', paymentID), { data: { paymentID: paymentID } })
+                .then(response => {
+                    // On successful delete, you may want to update the UI or reload the page
+                    window.location.reload();
+                    alert('Payment record deleted successfully.');
+                })
+                .catch(error => {
+                    console.error('Error deleting payment record:', error);
+                    alert('Failed to delete payment record. Please try again.');
+                });
         } else {
             // If 'NO' button is clicked or the user cancels the confirmation
-            // Redirect to the list of payments
-            window.location.href = '{{ route('viewPayment') }}';
         }
     }
 </script>
