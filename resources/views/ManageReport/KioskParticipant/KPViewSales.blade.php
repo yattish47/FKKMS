@@ -73,7 +73,7 @@
     <div class="main-section">
         <div class="card h-100">
             <div class="container text-center">
-                <h1>Sales Reports</h1>
+                <h1>SALES REPORT</h1>
             </div>
 
             <!-- Form for filtering by year and month -->
