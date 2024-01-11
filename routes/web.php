@@ -89,7 +89,7 @@ Route::get('/ManagePayment/KioskParticipant/updatePayment', [paymentController::
 Route::delete('/delete-payment/{paymentID}', [PaymentController::class, 'deletePayment'])->name('deletePayment');
 
 
-
+//route untuk managereport
 Route::get('/ManageReport/KioskParticipant/KPViewSales', [SalesController::class, 'index'])->name('reports');
 
 Route::post('/ManageReport/KioskParticipant/addSales', [SalesController::class, 'store'])->name('reports.store');

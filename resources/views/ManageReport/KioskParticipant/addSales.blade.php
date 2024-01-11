@@ -144,7 +144,7 @@
 
 </form>
 
-<script>
+<script> //untuk totalprice punya script
     document.getElementById('salesForm').addEventListener('submit', function() {
         // Set the 'year', 'month', and 'week' values in the form submission
         document.getElementsByName('year')[1].value = document.getElementsByName('year')[0].value;

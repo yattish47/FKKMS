@@ -19,6 +19,7 @@ class SalesController extends Controller
         return view('ManageReport.KioskParticipant.addSales');
     }
 
+    //Store function nk masuk db
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -58,6 +59,7 @@ class SalesController extends Controller
         }
     }
 
+    //update function
     public function update(Request $request, $ReportID)
     {
         $validator = Validator::make($request->all(), [
@@ -85,6 +87,7 @@ class SalesController extends Controller
         return redirect()->route('reports')->with('success', 'Sales record updated successfully');
     }
 
+    //delete function
     public function destroy(Request $request, $ReportID)
     {
         // Add debugging statement
@@ -116,6 +119,7 @@ class SalesController extends Controller
         return view('ManageReport.KioskParticipant.KPViewSales', compact('reports'));
     }
 
+    //PUPUK Admin View function
     public function PadminView()
 {
     $reports = SalesRecord::all(); // Fetch all reports (modify as needed)
@@ -123,6 +127,7 @@ class SalesController extends Controller
     return view('ManageReport/PUPUKAdmin/PAdminViewSales', compact('reports'));
 }
 
+//Admin view function
 public function AdminView()
 {
     $reports = SalesRecord::all(); // Fetch all reports (modify as needed)
@@ -130,6 +135,7 @@ public function AdminView()
     return view('ManageReport/Admin/AdminViewSales', compact('reports'));
 }
 
+//untuk generate button report PUPUK ADMIN
 public function filterPAdmin(Request $request)
     {
         $query = SalesRecord::query();
@@ -147,6 +153,7 @@ public function filterPAdmin(Request $request)
         return view('ManageReport.PUPUKAdmin.PAdminViewSales', compact('reports'));
     }
 
+    //untuk generate button report ADMIN
     public function filterAdmin(Request $request)
     {
         $query = SalesRecord::query();
