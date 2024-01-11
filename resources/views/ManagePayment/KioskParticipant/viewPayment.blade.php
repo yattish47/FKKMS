@@ -2,6 +2,7 @@
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/ManageKiosk/listofkioskapplication.css') }}"> <!-- insert css -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <style>
         .btn-new-payment {
@@ -90,11 +91,19 @@
     function confirmDelete(paymentID) {
         if (confirm('Delete the details?')) {
             // If 'YES' button is clicked
-            window.location.href = '/ManagePayment/KioskParticipant/viewPayment';
+
+            axios.delete('{{ route("deletePayment", ":paymentID") }}'.replace(':paymentID', paymentID), { data: { paymentID: paymentID } })
+                .then(response => {
+                    // On successful delete, you may want to update the UI or reload the page
+                    window.location.reload();
+                    alert('Payment record deleted successfully.');
+                })
+                .catch(error => {
+                    console.error('Error deleting payment record:', error);
+                    alert('Failed to delete payment record. Please try again.');
+                });
         } else {
             // If 'NO' button is clicked or the user cancels the confirmation
-            // Redirect to the list of payments
-            window.location.href = '{{ route('viewPayment') }}';
         }
     }
 </script>
