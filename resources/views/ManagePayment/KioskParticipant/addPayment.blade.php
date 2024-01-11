@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('css/ManagePayment/addPayment.css') }}"> <!-- insert css -->
 
 <!-- section class start here  -->
-<div class="container-fluid p-0"><!-- 1  -->
+<div class="container-fluid p-5"><!-- 1  -->
     <div class="card h-100 text-center"><!-- 2  -->
         <div class="card-body"><!-- 3  -->
             <h3 class="card-title fw-bold text-center">PAYMENT NEW DETAIL</h3> 
@@ -34,7 +34,7 @@
                     <div class="row mb-3">
                         <label for="payProof" class="col-sm-3 col-form-label">UPLOAD RECEIPT:</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" id="payProof" name="payProof" accept=".pdf, .png, .jpg" required>
+                            <input type="file" class="form-control" id="payProof" name="payProof" accept=".pdf, .png, .jpg" >
                         </div>
                     </div>
 

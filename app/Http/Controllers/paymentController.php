@@ -45,13 +45,15 @@ class paymentController extends Controller
             $request->validate([
                 'payDate' => 'required',
                 'payDetail' => 'required',
-                'payProof' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed image file types and maximum size
+                'payProof' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed image file types and maximum size
                 'payInvoice' => 'nullable',
                 'payStatus' => 'nullable',
             ]);
+
+            \Log::info('Validation passed');
     
             //get foreign key from kiosk table
-            $kioskID = Auth::user()->kiosk->id;
+            $kioskID = Auth::user()->kiosks->id;
     
             // Create a new paymentRecord instance
             $paymentrecords = new paymentRecord;
@@ -70,6 +72,8 @@ class paymentController extends Controller
     
             // Save the payment record to the database
             $paymentrecords->save();
+
+            \Log::info('Payment record saved successfully');
     
             // Redirect to the desired route
             return redirect()->intended('viewPayment')->with('success', 'Payment details successfully submitted!');
@@ -90,7 +94,7 @@ class paymentController extends Controller
     public function updatePayment(Request $request)
     {
         // Validate the form data
-        $validatedData = $request->validate([
+        $request->validate([
             'paymentID' => 'required',
             'payDate'=> 'required',
             'payDetail' => 'required',
@@ -102,22 +106,24 @@ class paymentController extends Controller
         //get foreign key from kiosk table
         $kioskID = auth()->kiosks->id;
 
-        // Handle file uploads
+        // Create a new paymentRecord instance
+        $paymentrecords = new PaymentRecord;
+        $paymentrecords->kioskID = $kioskID;
+        $paymentrecords->payDate = $request->payDate;
+        $paymentrecords->payDetail = $request->payDetail;
+        $paymentrecords->payInvoice = $request->payInvoice;
+        $paymentrecords->payStatus = $request->payStatus;
+
+        // Handle file upload
+        if ($request->hasFile('payProof')) {
         $payProof = $request->file('payProof');
-        $proofPath = $payProof->storeAs('payProof', $request->input('paymentID').'.'.$payProof->extension(), 'public');
+        $proofPath = $payProof->store('payProof', 'public');
+        $paymentrecords->payProof = $proofPath;
+        }
 
-        // Save the payment data to the database
-        $paymentrecords = new paymentrecords([
-            // 'paymentID' => $request->input('paymentID'),
-            'kioskID' => $kioskID,
-            'payDate' => $request->input('payDate'),
-            'payDetail' => $validatedData['payDetail'],
-            'payProof' => $proofPath,
-            'payInvoice' => $request->input('payInvoice'),
-            'payStatus' => $request->input('payStatus'),
-        ]);
-
+        // Save the payment record to the database
         $paymentrecords->save();
+
         // Redirect to the payment details page or any other page after successful update
         return redirect()->route('viewPayment')->with('success', 'Payment details successfully updated!');
     }
